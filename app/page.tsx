@@ -4,7 +4,7 @@ function Home() {
 
 
   return (
-      <div>front office component</div>
+      <div className="text-green-500">front office component</div>
   );
 }
 
