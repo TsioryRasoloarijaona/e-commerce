@@ -6,8 +6,8 @@ import { ChakraProvider } from '@chakra-ui/react'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Car Show",
-  description: "Application de vente de voitures pour trouver votre véhicule",
+  title: "e-car",
+  description: "e-car",
 };
 
 export default function RootLayout({
