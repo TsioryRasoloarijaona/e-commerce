@@ -12,7 +12,7 @@ export default function Product() {
         Ad quibusdam labore, unde tenetur praesentium sit nisi debitis" imgURL="https://c0.lestechnophiles.com/www.numerama.com/wp-content/uploads/2024/04/tesla-model3-52b-680x383.jpg?resize=500,281&key=8fe3d823" detailLink="/" price={300}/>
       <Card carName="tesla" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
         Quae, tempora? Sint suscipit a, sed amet eveniet laudantium modi dignissimos saepe qui? 
-        Ad quibusdam labore, unde tenetur praesentium sit nisi debitis" imgURL="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_gw/huracan/2023/09_18_refresh/s/gw_hura_s_02_m.jpg" detailLink="/" price={300}/>
+        Ad quibusdam labore, unde tenetur praesentium sit nisi debitis" imgURL="https://hips.hearstapps.com/hmg-prod/images/dwburnett-pcoty-roughs-6856-1642525990.jpg?crop=1.00xw:0.666xh;0,0.144xh&resize=640:*" detailLink="/" price={300}/>
       <Card carName="tesla" description="Lorem ipsum dolor sit amet consectetur adipisicing elit. 
         Quae, tempora? Sint suscipit a, sed amet eveniet laudantium modi dignissimos saepe qui? 
         Ad quibusdam labore, unde tenetur praesentium sit nisi debitis" imgURL="https://cdn.motor1.com/images/mgl/w1AKR/s1/vw-golf-7-r-abt.webp" detailLink="/" price={300}/>
