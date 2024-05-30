@@ -1,12 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
+import ButtonAppointment from "./buttonClick/buttonAppointment";
 import {
   Card,
   Stack,
   Heading,
   Text,
-  Divider,
-  ButtonGroup,
   CardBody,
   CardFooter,
   Button,
@@ -18,6 +17,7 @@ interface cardProps {
   description: string;
   price: number;
   detailLink: string;
+  id: number
 }
 
 const CardProduct: React.FC<cardProps> = ({
@@ -26,6 +26,7 @@ const CardProduct: React.FC<cardProps> = ({
   description,
   price,
   detailLink,
+  id
 }) => {
   return (
     <div>
@@ -56,10 +57,7 @@ const CardProduct: React.FC<cardProps> = ({
         </CardBody>
         <CardFooter>
           <div className="space-x-4 flex items-center">
-            <Button background={"white"}>
-              <Text color={"black"}>appointment</Text>
-            </Button>
-
+            <ButtonAppointment id={id}/>
             <Link href={detailLink}>
               <Text color="white">detail</Text>
             </Link>
