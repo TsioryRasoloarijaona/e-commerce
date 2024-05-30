@@ -29,32 +29,40 @@ const CardProduct: React.FC<cardProps> = ({
 }) => {
   return (
     <div>
-      <Card maxW="lg">
+      <Card maxW="lg" backgroundColor={"grey.400"} borderRadius={0}>
         <CardBody>
-          <Image
-            src={imgURL}
-            alt="Green double couch with wooden legs"
-            width={700}
-            height={600}
-          />
+          <div className="max-w-[700px] h-[300px] overflow-hidden">
+            <Image
+              src={imgURL}
+              alt="Green double couch with wooden legs"
+              width={600}
+              height={300}
+              className="object-contain w-full h-full"
+            />
+          </div>
           <Stack mt="6" spacing="3">
-            <Heading size="md">{carName}</Heading>
-            <Text>{description}</Text>
-            <Text color="blue.600" fontSize="2xl">
+            <Heading fontSize={"2xl"} color={"white"}>
+              {carName}
+            </Heading>
+            <div className="h-[65px] overflow-y-hidden">
+              <Text color="white" fontSize="small" lineHeight={6}>
+                {description}
+              </Text>
+            </div>
+            <Text color="white" fontSize="2xl" fontWeight={"bold"}>
               ${price}
             </Text>
           </Stack>
         </CardBody>
         <CardFooter>
-          <div className="space-x-4">
-            <button className="text-white bg-black px-4 py-2 rounded-sm">
-              appointement
-            </button>
-           
-              <Link href={detailLink} className="text-sky-700">
-                details
-              </Link>
-           
+          <div className="space-x-4 flex items-center">
+            <Button background={"white"}>
+              <Text color={"black"}>appointment</Text>
+            </Button>
+
+            <Link href={detailLink}>
+              <Text color="white">detail</Text>
+            </Link>
           </div>
         </CardFooter>
       </Card>

@@ -1,5 +1,5 @@
 import Hero from "./hero/hero"
-import Product from "./hero/product/product"
+import Product from "./product/product"
 
 export default function FrontOffice() {
   return (

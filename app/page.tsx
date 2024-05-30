@@ -1,5 +1,5 @@
 import FrontOffice from "./FrontOffice/frontOffice";
-import Product from "./FrontOffice/hero/product/product";
+import Product from "./FrontOffice/product/product";
 function Home() {
 
 
