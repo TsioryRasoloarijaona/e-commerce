@@ -1,10 +1,12 @@
-import { Box, Heading, Grid, GridItem } from '@chakra-ui/react';
+import FrontOffice from "./FrontOffice/frontOffice";
 
 function Home() {
 
 
   return (
-      <div className="text-green-500">front office component</div>
+      <div>
+        <FrontOffice/>
+      </div>
   );
 }
 
