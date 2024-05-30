@@ -1,5 +1,4 @@
-import DrawerComponent from "../components/drawer";
-import { VscMenu } from "react-icons/vsc";
+import DrawerComponent from "../../components/drawer";
 import { IoHomeOutline } from "react-icons/io5";
 import { GrCircleInformation } from "react-icons/gr";
 import { FaCar } from "react-icons/fa";
