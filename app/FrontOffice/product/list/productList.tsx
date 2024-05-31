@@ -10,7 +10,7 @@ export default function ProductList() {
         <Nav />
         <Search />
       </header>
-      <div className="flex flex-row justify-center items-center gap-5 my-3">
+      <div className="flex flex-row justify-center items-center gap-5 my-3 overflow-x-auto no-scrollbar">
         <Filter option="brand" />
         <Filter option="sit number" />
         <Filter option="color" />
