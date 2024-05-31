@@ -18,6 +18,8 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  width: 100vw;
+  overflow-x: hidden;
 }
 
 @layer utilities {
@@ -25,3 +27,8 @@ body {
     text-wrap: balance;
   }
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  height: 1px;
+}
+

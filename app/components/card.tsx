@@ -17,7 +17,7 @@ interface cardProps {
   description: string;
   price: number;
   detailLink: string;
-  id: number
+  id: number;
 }
 
 const CardProduct: React.FC<cardProps> = ({
@@ -26,19 +26,19 @@ const CardProduct: React.FC<cardProps> = ({
   description,
   price,
   detailLink,
-  id
+  id,
 }) => {
   return (
-    <div>
+    <div className="mx-auto">
       <Card maxW="lg" backgroundColor={"grey.400"} borderRadius={0}>
         <CardBody>
-          <div className="max-w-[700px] h-[300px] overflow-hidden">
+          <div className="w-full h-[300px] relative overflow-hidden ">
             <Image
               src={imgURL}
               alt="Green double couch with wooden legs"
-              width={600}
-              height={300}
-              className="object-contain w-full h-full"
+              layout="fill"
+              objectFit="cover"
+              className="absolute top-0 left-0"
             />
           </div>
           <Stack mt="6" spacing="3">
@@ -57,7 +57,7 @@ const CardProduct: React.FC<cardProps> = ({
         </CardBody>
         <CardFooter>
           <div className="space-x-4 flex items-center">
-            <ButtonAppointment id={id}/>
+            <ButtonAppointment id={id} />
             <Link href={detailLink}>
               <Text color="white">detail</Text>
             </Link>
