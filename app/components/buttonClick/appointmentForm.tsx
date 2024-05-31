@@ -8,7 +8,7 @@ import {
   FormControl,
   FormLabel,
   Input,
-  background,
+  Textarea,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 export default function AppointmentForm() {
@@ -21,16 +21,20 @@ export default function AppointmentForm() {
           <ModalBody>
             <FormControl>
               <FormLabel>First name</FormLabel>
-              <Input placeholder="First name" focusBorderColor="gray.300"/>
+              <Input placeholder="First name" focusBorderColor="gray.300" />
             </FormControl>
 
             <FormControl mt={4}>
               <FormLabel>Last name</FormLabel>
-              <Input placeholder="Last name" focusBorderColor="gray.300"/>
+              <Input placeholder="Last name" focusBorderColor="gray.300" />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>phone number</FormLabel>
-              <Input type="tel" placeholder="+03305654545" focusBorderColor="gray.300"/>
+              <Input
+                type="tel"
+                placeholder="+03305654545"
+                focusBorderColor="gray.300"
+              />
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>date</FormLabel>
@@ -43,7 +47,18 @@ export default function AppointmentForm() {
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>email</FormLabel>
-              <Input placeholder="@gmail.com" type="email" focusBorderColor="gray.300"/>
+              <Input
+                placeholder="@gmail.com"
+                type="email"
+                focusBorderColor="gray.300"
+              />
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>Message</FormLabel>
+              <Textarea
+                placeholder="write your message here ......."
+                focusBorderColor="gray.300"
+              />
             </FormControl>
           </ModalBody>
 
@@ -53,7 +68,7 @@ export default function AppointmentForm() {
               color="white"
               bgColor="gray.800"
               variant="solid"
-              _hover={{ bg: 'gray.800' }}
+              _hover={{ bg: "gray.800" }}
             >
               send
             </Button>

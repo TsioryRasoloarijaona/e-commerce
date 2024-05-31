@@ -17,7 +17,7 @@ interface modalProp {
 const ModalCompenent: React.FC<modalProp> = ({ content, open, close }) => {
   return (
     <div>
-      <Modal isOpen={open} onClose={close} >
+      <Modal isOpen={open} onClose={close} size={"md"} isCentered>
         <ModalOverlay />
         <AppointmentForm/>
       </Modal>
