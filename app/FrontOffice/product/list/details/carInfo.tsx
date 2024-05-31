@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 
 export default function CarInfo() {
+    
     const select = {borderColor : "white",color : "white",transition: "all 1s ease-in-out"}
   return (
     <div>
@@ -24,7 +25,15 @@ export default function CarInfo() {
          
         </TabList>
         <TabPanels>
-          <TabPanel>brand</TabPanel>
+          <TabPanel>Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            A natus perspiciatis repudiandae illum sapiente voluptatum cupiditate ratione,
+             laborum molestiae, officia impedit cum ipsa dolores laboriosam, velit et? Fugiat, ex inventore.
+             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            A natus perspiciatis repudiandae illum sapiente voluptatum cupiditate ratione,
+             laborum molestiae, officia impedit cum ipsa dolores laboriosam, velit et? Fugiat, ex inventore.
+             Lorem ipsum dolor, sit amet consectetur adipisicing elit. 
+            A natus perspiciatis repudiandae illum sapiente voluptatum cupiditate ratione,
+             laborum molestiae, officia impedit cum ipsa dolores laboriosam, velit et? Fugiat, ex inventore.</TabPanel>
           <TabPanel>motor</TabPanel>
           <TabPanel>sits</TabPanel>
           <TabPanel>three</TabPanel>
