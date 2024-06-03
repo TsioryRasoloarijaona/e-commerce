@@ -32,7 +32,7 @@ const CardProduct: React.FC<cardProps> = ({
     <div className="mx-auto">
       <Card maxW="lg" backgroundColor={"grey.400"} borderRadius={0}>
         <CardBody>
-          <div className="w-full h-[300px] relative overflow-hidden ">
+          <div className=" h-[300px] relative overflow-hidden ">
             <Image
               src={imgURL}
               alt="Green double couch with wooden legs"

@@ -2,9 +2,15 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState } from "react";
-export default function Filter({ option }: { option: string }) {
+
+interface filterProps {
+  option : string,
+  menu : string[]
+}
+
+ const Filter :  React.FC<filterProps> = ({ option,menu })=> {
   const [choice, setChoice] = useState(option);
-  const menu: string[] = ["choice1", "choice2", "choice3"];
+  
   return (
     <div>
       <Menu>
@@ -32,3 +38,5 @@ export default function Filter({ option }: { option: string }) {
     </div>
   );
 }
+
+export default Filter;
