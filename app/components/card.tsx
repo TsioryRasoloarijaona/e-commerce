@@ -10,31 +10,21 @@ import {
   CardFooter,
   Button,
 } from "@chakra-ui/react";
+import { carInterface } from "../interface/carInterface";
 
 interface cardProps {
-  imgURL: string;
-  carName: string;
-  description: string;
-  price: number;
-  detailLink: string;
-  id: number;
+  data: carInterface;
+  detailLink : string
 }
 
-const CardProduct: React.FC<cardProps> = ({
-  imgURL,
-  carName,
-  description,
-  price,
-  detailLink,
-  id,
-}) => {
+const CardProduct: React.FC<cardProps> = ({ data , detailLink}) => {
   return (
     <div className="mx-auto">
       <Card maxW="lg" backgroundColor={"grey.400"} borderRadius={0}>
         <CardBody>
           <div className="w-full h-[300px] relative overflow-hidden ">
             <Image
-              src={imgURL}
+              src={data.images[0]}
               alt="Green double couch with wooden legs"
               layout="fill"
               objectFit="cover"
@@ -43,21 +33,21 @@ const CardProduct: React.FC<cardProps> = ({
           </div>
           <Stack mt="6" spacing="3">
             <Heading fontSize={"2xl"} color={"white"}>
-              {carName}
+              {data.name}
             </Heading>
             <div className="h-[65px] overflow-y-hidden">
               <Text color="white" fontSize="small" lineHeight={6}>
-                {description}
+                {data.description}
               </Text>
             </div>
             <Text color="white" fontSize="2xl" fontWeight={"bold"}>
-              ${price}
+              ${data.price}
             </Text>
           </Stack>
         </CardBody>
         <CardFooter>
           <div className="space-x-4 flex items-center">
-            <ButtonAppointment id={id} />
+            <ButtonAppointment id={data.id} />
             <Link href={detailLink}>
               <Text color="white">detail</Text>
             </Link>

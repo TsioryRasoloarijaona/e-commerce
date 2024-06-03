@@ -9,13 +9,9 @@ export default async function Product() {
       {car.map((el) => (
         <div>
           <Card
-            carName={el.name}
-            description={el.description}
-            imgURL={el.images[0]}
             detailLink="/FrontOffice/product/list/details"
-            price={el.price}
-            id={el.id}
             key={el.id}
+            data={el}
           />
         </div>
       ))}
