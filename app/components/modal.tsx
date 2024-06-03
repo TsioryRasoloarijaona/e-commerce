@@ -1,13 +1,7 @@
 import AppointmentForm from "./buttonClick/appointmentForm";
 import {
   Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
-  Button,
+  ModalOverlay
 } from "@chakra-ui/react";
 interface modalProp {
   content: React.ReactNode;

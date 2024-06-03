@@ -9,6 +9,7 @@ export default function Details() {
     <>
       <div className="h-screen overflow-y-hidden">
         <header className="bg-gray-950 p-4 flex flex-row items-center">
+          <Nav></Nav>
           <Heading
             className="text-white mx-auto"
             size={"2xl"}
@@ -16,7 +17,6 @@ export default function Details() {
           >
             car name
           </Heading>
-          <Nav></Nav>
         </header>
         <div className="bg-gray-950 grid grid-cols-2 h-[95vh] w-screen">
           <div className="bg-red-500 relative w-full h-full">
