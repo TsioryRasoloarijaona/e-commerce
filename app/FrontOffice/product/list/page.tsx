@@ -23,11 +23,11 @@ export default async function ProductList({
     interval: parsedSearchParams.interval || [],
   };
 
-  if (key.type.length !== 0 && key.motor.length !== 0) {
+  if (key.type.length !== 0 && key.motor.length !== 0 && key.interval.length == 2) {
     cars = await getData(
       `http://localhost:8080/car/motor/type/price?&motorType=${
         key.motor
-      }&type=${key.type}&priceMin=${0}&priceMax=${4000000}`
+      }&type=${key.type}&priceMin=${key.interval[0]}&priceMax=${key.interval[1]}`
     );
     (cars?.length == 0 ? show = true : show = false)
   

@@ -1,11 +1,12 @@
 import React from 'react'
 import Filter from '@/app/components/filter'
 import { getData } from '@/app/hooks/getData';
+import FilterPrice from '@/app/components/filterPrice';
 export default async function FilterList() {
 
     const motor: string[] = await getData("http://localhost:8080/car/motorList");
     const type : string[] = await getData("http://localhost:8080/car/typeList");
-
+    const prices : [number,number][] = await getData('http://localhost:8080/car/intervalPrice')
  
 
   return (
@@ -13,6 +14,7 @@ export default async function FilterList() {
     
         <Filter option="motor type" menu={motor} />
         <Filter option="type" menu={type} />
+        <FilterPrice option='price range' menu={prices}/>
        
       </div>
   )
