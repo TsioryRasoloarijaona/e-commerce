@@ -4,34 +4,35 @@ import { getData } from "@/app/hooks/getData";
 import { carInterface } from "@/app/interface/carInterface";
 import CardProduct from "@/app/components/card";
 import FilterList from "./filter/filterList";
-import { createSearchParamsCache, parseAsString } from "nuqs/server";
-
-
-export const searchParamsCache = createSearchParamsCache({
-  research: parseAsString.withDefault(""),
-  brand: parseAsString.withDefault(""),
-  color: parseAsString.withDefault(""),
-  name: parseAsString.withDefault(""),
-  motor: parseAsString.withDefault(""),
-});
+import { searchParamsCache } from "@/app/hooks/searchParam";
+import { Toast } from "@/app/components/toastComponent";
 
 export default async function ProductList({
-  searchParams
+  searchParams,
 }: {
-  searchParams: Record<string, string | string[] | undefined>
+  searchParams: Record<string, string | string[] | undefined>;
 }) {
-  const cars: carInterface[] = await getData(
-    "http://localhost:8080/car/allCar"
-  );
+  var cars: carInterface[] | null = [];
 
-  const {} = searchParamsCache.parse(searchParams)
+  const parsedSearchParams = searchParamsCache.parse(searchParams);
+  const key = {
+    type: parsedSearchParams.type || "",
+    motor: parsedSearchParams.motor || "",
+    research: parsedSearchParams.research || "",
+    interval: parsedSearchParams.interval || [],
+  };
 
-  const key : string = searchParamsCache.get('brand')+
-                        " "+searchParamsCache.get('color');
-                        " "+searchParamsCache.get('name');
-                      
-  
-  const carSearch : carInterface[] = await getData(`http://localhost:8080/car/research?input=${key}`)
+  if (key.type.length !== 0 && key.motor.length !== 0) {
+    cars = await getData(
+      `http://localhost:8080/car/motor/type/price?&motorType=${
+        key.motor
+      }&type=${key.type}&priceMin=${0}&priceMax=${10000000}`
+    );
+  }
+  if (cars?.length == 0) {
+    cars = await getData("http://localhost:8080/car/allCar");
+    <Toast/>;
+  }
 
   return (
     <div className="bg-gray-950">
@@ -42,14 +43,14 @@ export default async function ProductList({
       <FilterList />
 
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto bg-gray-950 pt-7">
-        {carSearch?.map((el) => (
+        {cars?.map((el) => (
           <div>
             <CardProduct
               detailLink={"/FrontOffice/product/list/details"}
               key={el.id}
               data={el}
             />
-           
+            <p className="text-white">{key.interval[0]}</p>
           </div>
         ))}
       </div>
