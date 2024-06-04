@@ -1,16 +1,23 @@
+
 "use client";
 import { useToast } from "@chakra-ui/react";
+import { useEffect } from 'react';
 
-
-export function Toast() {
+export function Toast({ shouldShow } : {shouldShow : boolean}) {
   const toast = useToast();
-  const open = ()=> toast({
-    title: "Account created.",
-    description: "We've created your account for you.",
-    status: "success",
-    duration: 9000,
-    isClosable: true,
-  });
 
-  return open();
+  useEffect(() => {
+    if (shouldShow) {
+      toast({
+       description: "no matching items",
+        status: "warning",
+        duration: 3000,
+        isClosable: true,
+        colorScheme : "gray",
+        position : 'bottom-left'
+      });
+    }
+  }, [shouldShow, toast]);
+
+  return null; 
 }
