@@ -21,7 +21,8 @@ import { postData } from "@/app/hooks/postData";
 import { useState } from "react";
 import { PromiseToast } from "../promiseToast";
 import GoogleAuth from "@/app/hooks/googleAuth";
-import { usePersonStore } from "@/app/hooks/googleAuth";
+import { usePersonStore } from "@/app/hooks/googleAuth"
+import { useEffect } from "react";
 
 const appointmentSchema = z.object({
   lastName: z
@@ -62,7 +63,8 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
   const {
     register,
     handleSubmit,
-    
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<appointmentRequest>({
     resolver: zodResolver(appointmentSchema),
@@ -71,6 +73,11 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
   const [time, setTime] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
   const { name, email } = usePersonStore();
+
+  useEffect(() => {
+    setValue('lastName', name);
+    setValue('email', email);
+  }, [name, email, setValue]);
 
   const onSubmit: SubmitHandler<appointmentRequest> = async (data) => {
     const car: Car = { id: idCar };
@@ -87,6 +94,7 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
     await postData("http://localhost:8080/rdv/take", body);
     const endTime = Date.now();
     setTime(endTime - startTime);
+    reset()
   };
 
  
