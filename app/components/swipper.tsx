@@ -3,21 +3,34 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import Image from "next/image";
 
-export default function SwipperComponent() {
+export function SwipperComponent() {
   return (
-    <div className="flex flex-row items-center h-5/6 w-5/6 p-2 bg-transparent">
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper" color="white">
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+    <>
+      <Swiper navigation={true} modules={[Navigation]} className="mySwipe " >
+        <SwiperSlide className="w-full">
+          <div className="relative w-[800px] h-[87vh]">
+            <Image
+              src="https://media.zenfs.com/fr/sport_auto_fr_articles_567/a15833aa57478a65b7bcc86ea10c9e3c" // Remplacez par le chemin réel vers votre image
+              alt="Description de l'image"
+              layout="fill"
+              objectFit="cover" // Assurez-vous que l'image couvre entièrement le conteneur sans déformation
+            />
+          </div>
+        </SwiperSlide>
+        <SwiperSlide className="w-full">
+          <div className="relative w-[800px] h-[87vh]">
+            <Image
+              src="https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_detail/aventador/svj_roadster/2021/03_22/aventador_svj_r_s3_m.jpg" // Remplacez par le chemin réel vers votre image
+              alt="Description de l'image"
+              layout="fill"
+              objectFit="cover" // Assurez-vous que l'image couvre entièrement le conteneur sans déformation
+            />
+          </div>
+        </SwiperSlide>
+       
       </Swiper>
-    </div>
+    </>
   );
 }
