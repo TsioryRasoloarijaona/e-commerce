@@ -18,8 +18,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { postData } from "@/app/hooks/postData";
-import { Toast } from "../toastComponent";
 import { useState } from "react";
+import { PromiseToast } from "../promiseToast";
 
 const appointmentSchema = z.object({
   firstName: z
@@ -71,11 +71,8 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
     resolver: zodResolver(appointmentSchema),
   });
 
-  const [description, setDescription] = useState<string | null>("");
+  const [time, setTime] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
-  const [status, setStatus] = useState<"error" | "success" | "warning">(
-    "warning"
-  );
 
   const onSubmit: SubmitHandler<appointmentRequest> = async (data) => {
     const car: Car = { id: idCar };
@@ -88,18 +85,16 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
       appointmentDate: data.appointmentDate,
       message: data.message,
     };
-
-    const post = await postData("http://localhost:8080/rdv/take", body);
-
-    post.error === null
-      ? ((setDescription(post.success)), (setStatus("success")))
-      : ((setDescription(post.error))), (setStatus("error"));
     setOpen(true);
+    const startTime = Date.now();
+    await postData("http://localhost:8080/rdv/take", body);
+    const endTime = Date.now();
+    setTime(endTime - startTime);
   };
 
   return (
     <div>
-      <Toast description={description} status={status} shouldShow={open} />
+      <PromiseToast show={open} timeOut={time} />
 
       <ModalContent>
         <ModalHeader>appointment information</ModalHeader>
