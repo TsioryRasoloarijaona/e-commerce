@@ -4,52 +4,63 @@ import { getData } from "@/app/hooks/getData";
 import { carInterface } from "@/app/interface/carInterface";
 import CardProduct from "@/app/components/card";
 import FilterList from "./filter/filterList";
-import { createSearchParamsCache, parseAsString } from "nuqs/server";
+import { searchParamsCache } from "@/app/hooks/searchParam";
+import { Toast } from "@/app/components/toastComponent";
 
-
-export const searchParamsCache = createSearchParamsCache({
-  research: parseAsString.withDefault(""),
-  brand: parseAsString.withDefault(""),
-  color: parseAsString.withDefault(""),
-  name: parseAsString.withDefault(""),
-  motor: parseAsString.withDefault(""),
-});
 
 export default async function ProductList({
-  searchParams
+  searchParams,
 }: {
-  searchParams: Record<string, string | string[] | undefined>
+  searchParams: Record<string, string | string[] | undefined>;
 }) {
-  const cars: carInterface[] = await getData(
-    "http://localhost:8080/car/allCar"
-  );
+  var cars: carInterface[] | null = [];
+  let show = false
+  const parsedSearchParams = searchParamsCache.parse(searchParams);
+  const key = {
+    type: parsedSearchParams.type || "",
+    motor: parsedSearchParams.motor || "",
+    research: parsedSearchParams.research || "",
+    interval: parsedSearchParams.interval || [],
+  };
 
-  const {} = searchParamsCache.parse(searchParams)
-
-  const key : string = searchParamsCache.get('brand')+
-                        " "+searchParamsCache.get('color');
-                        " "+searchParamsCache.get('name');
-                      
+  if (key.type.length !== 0 && key.motor.length !== 0 && key.interval.length == 2) {
+    cars = await getData(
+      `http://localhost:8080/car/motor/type/price?&motorType=${
+        key.motor
+      }&type=${key.type}&priceMin=${key.interval[0]}&priceMax=${key.interval[1]}`
+    );
+    (cars?.length == 0 ? show = true : show = false)
   
-  const carSearch : carInterface[] = await getData(`http://localhost:8080/car/research?input=${key}`)
+  }
+  if (key.research.length > 0) {
+    cars = await getData(
+      `http://localhost:8080/car/research?&input=${key.research}`
+    );
+    (cars?.length == 0 ? show = true : show = false)
+  }
+  if (cars?.length == 0) {
+    cars = await getData("http://localhost:8080/car/allCar");
+    
+  }
 
   return (
     <div className="bg-gray-950">
-      <header className="px-6 py-4 flex items-center justify-between">
+      <header className="px-6 py-4 flex items-center justify-between ">
         <Nav />
         <Search />
       </header>
-      <FilterList />
 
+      <FilterList />
+      <Toast shouldShow={show} />
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto bg-gray-950 pt-7">
-        {carSearch?.map((el) => (
+        {cars?.map((el) => (
           <div>
             <CardProduct
               detailLink={"/FrontOffice/product/list/details"}
               key={el.id}
               data={el}
             />
-           
+            <p className="text-white">{key.interval[0]}</p>
           </div>
         ))}
       </div>

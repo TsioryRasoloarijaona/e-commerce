@@ -3,6 +3,7 @@ import Image from "next/image";
 import CarInfo from "./carInfo";
 import { Heading } from "@chakra-ui/react";
 import ButtonAppointment from "@/app/components/buttonClick/buttonAppointment";
+import SwipperComponent from "@/app/components/swipper";
 
 export default function Details() {
   return (
@@ -12,23 +13,15 @@ export default function Details() {
           <Nav></Nav>
           <Heading
             className="text-white mx-auto"
-            size={"2xl"}
-            fontFamily={"monospace"}
+            size={"xl"}
+          
           >
-            car name
+            ferrarri
           </Heading>
         </header>
         <div className="bg-gray-950 grid grid-cols-2 h-[95vh] w-screen">
           <div className="bg-red-500 relative w-full h-full">
-            <Image
-              src={
-                "https://cdn.motor1.com/images/mgl/zxQBp4/s3/2024-lamborghini-revuelto-exterior.jpg"
-              }
-              alt="lambo"
-              layout="fill"
-              objectFit="cover"
-              className="absolute top-0 left-0"
-            />
+            <SwipperComponent/>
           </div>
           <div className="px-7 py-4">
             <div className="h-3/4">

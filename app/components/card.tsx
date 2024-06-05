@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ButtonAppointment from "./buttonClick/buttonAppointment";
+import { formatter } from "../hooks/numberFormat";
 import {
   Card,
   Stack,
@@ -8,7 +9,7 @@ import {
   Text,
   CardBody,
   CardFooter,
-  Button,
+  
 } from "@chakra-ui/react";
 import { carInterface } from "../interface/carInterface";
 
@@ -41,7 +42,7 @@ const CardProduct: React.FC<cardProps> = ({ data , detailLink}) => {
               </Text>
             </div>
             <Text color="white" fontSize="2xl" fontWeight={"bold"}>
-              ${data.price}
+              {formatter(data.price)}
             </Text>
           </Stack>
         </CardBody>

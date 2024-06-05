@@ -5,9 +5,7 @@ import {
   TabPanels,
   Tab,
   TabPanel,
-  Divider,
-  background,
-  border,
+
 } from "@chakra-ui/react";
 
 export default function CarInfo() {

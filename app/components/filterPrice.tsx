@@ -1,34 +1,33 @@
 "use client";
+import React from "react";
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useQueryState } from "nuqs";
+import { formatter } from "../hooks/numberFormat";
 
 interface filterProps {
-  option: string;
-  menu: string[];
+  option: string ;
+  menu: [number,number][];
 }
 
-const Filter: React.FC<filterProps> = ({ option, menu }) => {
-  const [motor, setMotor] = useQueryState("motor", {
-    shallow: false,
-    defaultValue: "",
-  });
-  const [type, setType] = useQueryState("type", {
-    shallow: false,
-    defaultValue: "",
-  });
+const FilterPrice: React.FC<filterProps> = ({ option, menu }) => {
   const [choice, setChoice] = useState(option);
+  const [interval, setInterval] = useQueryState<[number, number]>("interval", {
+    shallow: false,
+    defaultValue: [0,0],
+    parse: (value: string | string[]) => {
+      const parsedValue = value instanceof Array ? value : value.split(",");
+      return [parseFloat(parsedValue[0]), parseFloat(parsedValue[1])];
+    },
+  });
 
-  const keyWord = (word: string) => {
-    if (option === "motor type") {
-      setMotor(word !== "motor type" ? word : "");
-    } else if (option === "type") {
-      setType(word !== "type" ? word : "");
-    }
-    setChoice(word);
+  const keyWord = (word: [number,number]) => {
+   
+      setInterval(word);
+    
+    setChoice(formatter(word[0])+"-"+formatter(word[1]));
   };
-
   return (
     <div>
       <Menu>
@@ -49,7 +48,7 @@ const Filter: React.FC<filterProps> = ({ option, menu }) => {
         </MenuButton>
         <MenuList backgroundColor={"gray.800"} border={0}>
           <MenuItem
-            onClick={() => keyWord(option)}
+            // onClick={() =>/* keyWord(option)*/}
             backgroundColor={"gray.800"}
             color={"white"}
           >
@@ -61,7 +60,7 @@ const Filter: React.FC<filterProps> = ({ option, menu }) => {
               backgroundColor={"gray.800"}
               color={"white"}
             >
-              {menu}
+              {formatter(menu[0]) + " - " + formatter(menu[1])}
             </MenuItem>
           ))}
         </MenuList>
@@ -70,4 +69,4 @@ const Filter: React.FC<filterProps> = ({ option, menu }) => {
   );
 };
 
-export default Filter;
+export default FilterPrice;

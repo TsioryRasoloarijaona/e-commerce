@@ -1,19 +1,21 @@
 import React from 'react'
 import Filter from '@/app/components/filter'
 import { getData } from '@/app/hooks/getData';
+import FilterPrice from '@/app/components/filterPrice';
 export default async function FilterList() {
-    const brand: string[] = await getData("http://localhost:8080/car/brandList");
-    const color: string[] = await getData("http://localhost:8080/car/colorList");
-    const name: string[] = await getData("http://localhost:8080/car/nameList");
-    const motor: string[] = await getData("http://localhost:8080/car/motorList");
 
+    const motor: string[] = await getData("http://localhost:8080/car/motorList");
+    const type : string[] = await getData("http://localhost:8080/car/typeList");
+    const prices : [number,number][] = await getData('http://localhost:8080/car/intervalPrice')
+ 
 
   return (
     <div className="flex flex-row justify-center items-center gap-5 my-3 overflow-x-auto no-scrollbar">
-        <Filter option="brand" menu={brand} />
-        <Filter option="color" menu={color} />
-        <Filter option="name" menu={name} />
+    
         <Filter option="motor type" menu={motor} />
+        <Filter option="type" menu={type} />
+        <FilterPrice option='price range' menu={prices}/>
+       
       </div>
   )
 }
