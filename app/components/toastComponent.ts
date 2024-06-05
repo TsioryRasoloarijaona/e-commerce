@@ -3,17 +3,22 @@
 import { useToast } from "@chakra-ui/react";
 import { useEffect } from 'react';
 
-export function Toast({ shouldShow } : {shouldShow : boolean}) {
+interface toastProps {
+  shouldShow : boolean,
+  status : "warning" | "success" | "error",
+  description : string | null
+}
+
+export const Toast : React.FC<toastProps> =  ({ shouldShow,status,description })=> {
   const toast = useToast();
 
   useEffect(() => {
     if (shouldShow) {
       toast({
-       description: "no matching items",
-        status: "warning",
+       description: description,
+        status: status,
         duration: 3000,
         isClosable: true,
-        colorScheme : "gray",
         position : 'bottom-left'
       });
     }

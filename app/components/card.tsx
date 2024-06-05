@@ -48,7 +48,7 @@ const CardProduct: React.FC<cardProps> = ({ data , detailLink}) => {
         </CardBody>
         <CardFooter>
           <div className="space-x-4 flex items-center">
-            <ButtonAppointment id={data.id} />
+            <ButtonAppointment idCar={data.id} />
             <Link href={detailLink}>
               <Text color="white">detail</Text>
             </Link>

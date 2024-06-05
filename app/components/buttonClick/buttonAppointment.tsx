@@ -4,14 +4,14 @@ import { Button, Text } from "@chakra-ui/react";
 import ModalCompenent from "../modal";
 import { useDisclosure } from "@chakra-ui/react";
 
-export default function ButtonAppointment({ id }: { id: number }) {
+export default function ButtonAppointment({ idCar }: { idCar: number }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const click = () => {
     onOpen();
   };
   return (
     <div>
-      <ModalCompenent open = {isOpen} close={onClose} content={<p>{id}</p>}/>
+      <ModalCompenent open = {isOpen} close={onClose} idCar={idCar}/>
       <Button background={"white"} onClick={click}>
         <Text color={"black"}>appointment</Text>
       </Button>
