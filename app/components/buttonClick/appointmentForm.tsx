@@ -1,3 +1,4 @@
+'use client'
 import {
   ModalContent,
   ModalHeader,
@@ -11,7 +12,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-export default function AppointmentForm() {
+export default function AppointmentForm({idCar}:{idCar:number}) {
   return (
     <div>
       <ModalContent>
@@ -69,6 +70,7 @@ export default function AppointmentForm() {
               bgColor="gray.800"
               variant="solid"
               _hover={{ bg: "gray.800" }}
+              type="submit"
             >
               send
             </Button>
