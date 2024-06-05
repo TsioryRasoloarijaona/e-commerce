@@ -13,9 +13,13 @@ import {
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { appointmentRequest } from "@/app/interface/appointmentInterface";
+import { Car } from "@/app/interface/appointmentInterface";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { postData } from "@/app/hooks/postData";
+import { Toast } from "../toastComponent";
+import { useState } from "react";
 
 const appointmentSchema = z.object({
   firstName: z
@@ -30,7 +34,7 @@ const appointmentSchema = z.object({
     .refine((value) => value !== "", {
       message: "Last Name is required",
     }),
-  phoneNumber: z
+  contact: z
     .string()
     .trim()
     .refine((value) => value !== "", {
@@ -61,16 +65,42 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
   const {
     register,
     handleSubmit,
-   
+
     formState: { errors },
   } = useForm<appointmentRequest>({
     resolver: zodResolver(appointmentSchema),
   });
-  const onSubmit: SubmitHandler<appointmentRequest> = (data) =>
-    console.log(`car id : ${idCar} data : ${data.email}`);
+
+  const [description, setDescription] = useState<string | null>("");
+  const [open, setOpen] = useState<boolean>(false);
+  const [status, setStatus] = useState<"error" | "success" | "warning">(
+    "warning"
+  );
+
+  const onSubmit: SubmitHandler<appointmentRequest> = async (data) => {
+    const car: Car = { id: idCar };
+    const body: appointmentRequest = {
+      car: car,
+      firstName: data.firstName,
+      lastName: data.lastName,
+      contact: data.contact,
+      email: data.email,
+      appointmentDate: data.appointmentDate,
+      message: data.message,
+    };
+
+    const post = await postData("http://localhost:8080/rdv/take", body);
+
+    post.error === null
+      ? ((setDescription(post.success)), (setStatus("success")))
+      : ((setDescription(post.error))), (setStatus("error"));
+    setOpen(true);
+  };
 
   return (
     <div>
+      <Toast description={description} status={status} shouldShow={open} />
+
       <ModalContent>
         <ModalHeader>appointment information</ModalHeader>
         <ModalCloseButton />
@@ -101,9 +131,9 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
                 type="tel"
                 placeholder="+03305654545"
                 focusBorderColor="gray.300"
-                {...register("phoneNumber", { required: true })}
+                {...register("contact", { required: true })}
               />
-              {errors.phoneNumber && <p>{errors.phoneNumber.message}</p>}
+              {errors.contact && <p>{errors.contact.message}</p>}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>date</FormLabel>
@@ -114,11 +144,13 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
                 focusBorderColor="gray.300"
                 {...register("appointmentDate", { required: true })}
               />
-              {errors.appointmentDate && <p>{errors.appointmentDate.message}</p>}
+              {errors.appointmentDate && (
+                <p>{errors.appointmentDate.message}</p>
+              )}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>email</FormLabel>
-              
+
               <Input
                 placeholder="@gmail.com"
                 type="email"

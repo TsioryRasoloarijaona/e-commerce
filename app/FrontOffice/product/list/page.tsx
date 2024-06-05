@@ -51,7 +51,7 @@ export default async function ProductList({
       </header>
 
       <FilterList />
-      <Toast shouldShow={show} />
+      <Toast shouldShow={show} description="no matching items" status="warning"/>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto bg-gray-950 pt-7">
         {cars?.map((el) => (
           <div>
