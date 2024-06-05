@@ -4,7 +4,6 @@ export interface Car {
   
 export interface appointmentRequest {
     car: Car;
-    firstName: string;
     lastName : string;
     email: string;
     message: string;

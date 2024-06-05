@@ -20,19 +20,15 @@ import * as z from "zod";
 import { postData } from "@/app/hooks/postData";
 import { useState } from "react";
 import { PromiseToast } from "../promiseToast";
+import GoogleAuth from "@/app/hooks/googleAuth";
+import { usePersonStore } from "@/app/hooks/googleAuth";
 
 const appointmentSchema = z.object({
-  firstName: z
-    .string()
-    .trim()
-    .refine((value) => value !== "", {
-      message: "First Name is required",
-    }),
   lastName: z
     .string()
     .trim()
     .refine((value) => value !== "", {
-      message: "Last Name is required",
+      message: " Name is required",
     }),
   contact: z
     .string()
@@ -61,24 +57,25 @@ const appointmentSchema = z.object({
     }),
 });
 
+
 export default function AppointmentForm({ idCar }: { idCar: number }) {
   const {
     register,
     handleSubmit,
-
+    
     formState: { errors },
   } = useForm<appointmentRequest>({
     resolver: zodResolver(appointmentSchema),
   });
-
+  
   const [time, setTime] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
+  const { name, email } = usePersonStore();
 
   const onSubmit: SubmitHandler<appointmentRequest> = async (data) => {
     const car: Car = { id: idCar };
     const body: appointmentRequest = {
       car: car,
-      firstName: data.firstName,
       lastName: data.lastName,
       contact: data.contact,
       email: data.email,
@@ -92,33 +89,49 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
     setTime(endTime - startTime);
   };
 
+ 
+
   return (
     <div>
-      <PromiseToast show={open} timeOut={time} />
+      <PromiseToast show={open} timeOut={5000} />
 
       <ModalContent>
-        <ModalHeader>appointment information</ModalHeader>
+        <ModalHeader>Appointment request </ModalHeader>
         <ModalCloseButton />
+        <div className="pl-4">
+          <GoogleAuth/>
+        </div>
         <form action="" onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>
-            <FormControl>
-              <FormLabel>First name</FormLabel>
-              <Input
-                placeholder="First name"
-                focusBorderColor="gray.300"
-                {...register("firstName", { required: true })}
-              />
-              {errors.firstName && <p>{errors.firstName.message}</p>}
-            </FormControl>
-
             <FormControl mt={4}>
-              <FormLabel>Last name</FormLabel>
+              <FormLabel>name</FormLabel>
               <Input
-                placeholder="Last name"
+                placeholder="name"
                 focusBorderColor="gray.300"
+                defaultValue={name}
                 {...register("lastName", { required: true })}
+                
               />
-              {errors.lastName && <p>{errors.lastName.message}</p>}
+              {errors.lastName && (
+                <p className="text-red-500 text-sm">
+                  {errors.lastName.message}
+                </p>
+              )}
+            </FormControl>
+            <FormControl mt={4}>
+              <FormLabel>email</FormLabel>
+
+              <Input
+                placeholder="@gmail.com"
+                type="email"
+                focusBorderColor="gray.300"
+                value={email}
+                {...register("email", { required: true })}
+                readOnly
+              />
+              {errors.email && (
+                <p className="text-red-500 text-sm ">{errors.email.message}</p>
+              )}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>phone number</FormLabel>
@@ -128,7 +141,9 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
                 focusBorderColor="gray.300"
                 {...register("contact", { required: true })}
               />
-              {errors.contact && <p>{errors.contact.message}</p>}
+              {errors.contact && (
+                <p className="text-red-500 text-sm">{errors.contact.message}</p>
+              )}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>date</FormLabel>
@@ -140,19 +155,10 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
                 {...register("appointmentDate", { required: true })}
               />
               {errors.appointmentDate && (
-                <p>{errors.appointmentDate.message}</p>
+                <p className="text-red-500 text-sm ">
+                  {errors.appointmentDate.message}
+                </p>
               )}
-            </FormControl>
-            <FormControl mt={4}>
-              <FormLabel>email</FormLabel>
-
-              <Input
-                placeholder="@gmail.com"
-                type="email"
-                focusBorderColor="gray.300"
-                {...register("email", { required: true })}
-              />
-              {errors.email && <p>{errors.email.message}</p>}
             </FormControl>
             <FormControl mt={4}>
               <FormLabel>Message</FormLabel>
@@ -161,7 +167,9 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
                 focusBorderColor="gray.300"
                 {...register("message", { required: true })}
               />
-              {errors.message && <p>{errors.message.message}</p>}
+              {errors.message && (
+                <p className="text-red-500 text-sm">{errors.message.message}</p>
+              )}
             </FormControl>
           </ModalBody>
 
