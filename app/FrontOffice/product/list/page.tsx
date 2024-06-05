@@ -56,7 +56,7 @@ export default async function ProductList({
         {cars?.map((el) => (
           <div>
             <CardProduct
-              detailLink={"/FrontOffice/product/list/details"}
+              detailLink={`/FrontOffice/product/list/details/${el.id}`}
               key={el.id}
               data={el}
             />
