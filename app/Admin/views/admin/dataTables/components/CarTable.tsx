@@ -1,4 +1,6 @@
-import { Box, Flex, Icon, Progress, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue } from '@chakra-ui/react';
+'use client'
+
+import { Box, Button, Flex, Icon, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Progress, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import {
 	createColumnHelper,
 	flexRender,
@@ -10,32 +12,47 @@ import {
 
 import Card from '../../../../components/admin/card/Card';
 import * as React from 'react';
+import Image from 'next/image';
 
 type RowObj = {
-    id: string;
-    name: string;
-    description: string;
-    brand: string;
-    model: string;
-    color: string;
-    motorType: string;
-    power: number;
-    placeNumber: number;
-    status: string;
-    price: number;
-    images: string[];
+	id: number;
+	name: string;
+	description: string;
+	brand: string;
+	model: string;
+	color: string;
+	motorType: string;
+	power: number;
+	placeNumber: number;
+	status: boolean;
+	price: number;
+	images: string[];
 };
 
 const columnHelper = createColumnHelper<RowObj>();
 
-export default function CarTable(props: { tableData: any }) {
-	const { tableData } = props;
-	const [ sorting, setSorting ] = React.useState<SortingState>([]);
-	const textColor = useColorModeValue('secondaryGray.900', 'white');
+export default function CarTable({ tableData }: { tableData: RowObj[] }) {
+	const [data, setData] = React.useState<RowObj[]>(tableData);
+	const [sorting, setSorting] = React.useState<SortingState>([]);
+
 	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
-	let defaultData = tableData;
+	const textColor = useColorModeValue('secondaryGray.900', 'white');
+	const filteredData = tableData.filter(car => car.id !== 1);
+
+	const handlePinCar = async (carId: number) => {
+		const response = await fetch(`http://localhost:8080/car/pin/${carId}`
+			, { method: 'PUT' });
+		if (response.ok) {
+			setData(prevData =>
+				prevData.map(car =>
+					car.id === carId ? { ...car, status: true } : car
+				)
+			);
+		}
+	};
+
 	const columns = [
-        columnHelper.accessor('id', {
+		columnHelper.accessor('id', {
 			id: 'id',
 			header: () => (
 				<Text
@@ -73,7 +90,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('description', {
+		columnHelper.accessor('description', {
 			id: 'description',
 			header: () => (
 				<Text
@@ -92,7 +109,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('brand', {
+		columnHelper.accessor('brand', {
 			id: 'brand',
 			header: () => (
 				<Text
@@ -111,7 +128,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('model', {
+		columnHelper.accessor('model', {
 			id: 'model',
 			header: () => (
 				<Text
@@ -130,7 +147,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('color', {
+		columnHelper.accessor('color', {
 			id: 'color',
 			header: () => (
 				<Text
@@ -149,7 +166,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('motorType', {
+		columnHelper.accessor('motorType', {
 			id: 'motorType',
 			header: () => (
 				<Text
@@ -168,7 +185,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('power', {
+		columnHelper.accessor('power', {
 			id: 'power',
 			header: () => (
 				<Text
@@ -187,7 +204,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('placeNumber', {
+		columnHelper.accessor('placeNumber', {
 			id: 'placeNumber',
 			header: () => (
 				<Text
@@ -206,7 +223,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('status', {
+		columnHelper.accessor('status', {
 			id: 'status',
 			header: () => (
 				<Text
@@ -220,12 +237,12 @@ export default function CarTable(props: { tableData: any }) {
 			cell: (info: any) => (
 				<Flex align='center'>
 					<Text color={textColor} fontSize='sm' fontWeight='700'>
-						{info.getValue()}
+						{info.getValue() ? 'Pinned' : 'Not pinned'}
 					</Text>
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('price', {
+		columnHelper.accessor('price', {
 			id: 'price',
 			header: () => (
 				<Text
@@ -244,7 +261,7 @@ export default function CarTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('images', {
+		columnHelper.accessor('images', {
 			id: 'images',
 			header: () => (
 				<Text
@@ -257,16 +274,32 @@ export default function CarTable(props: { tableData: any }) {
 			),
 			cell: (info: any) => (
 				<Flex align='center'>
-					<Text color={textColor} fontSize='sm' fontWeight='700'>
-						{info.getValue()}
-					</Text>
+					{info.getValue().map((imageUrl: string, index: number) => (
+						<Image
+							key={index}
+							src={imageUrl}
+							alt={`Car image ${index + 1}`}
+							objectFit='cover'
+							width={40}
+							height={40}
+						/>
+					))}
 				</Flex>
 			)
 		}),
+		columnHelper.display({
+			id: 'actions',
+			header: () => <Text justifyContent='space-between' align='center' fontSize={{ sm: '10px', lg: '12px' }} color='gray.400'>ACTIONS</Text>,
+			cell: (info: any) => (
+				<Flex align='center'>
+					<Button size='sm' ml={10} onClick={() => handlePinCar(info.row.original.id)}>Pin</Button>
+				</Flex>
+			)
+		})
 	];
-	const [ data, setData ] = React.useState(() => [ ...defaultData ]);
+
 	const table = useReactTable({
-		data,
+		data: filteredData,
 		columns,
 		state: {
 			sorting
@@ -276,6 +309,7 @@ export default function CarTable(props: { tableData: any }) {
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true
 	});
+
 	return (
 		<Card flexDirection='column' w='100%' px='0px' overflowX={{ sm: 'scroll', lg: 'hidden' }}>
 			<Flex px='25px' mb="8px" justifyContent='space-between' align='center'>
@@ -283,9 +317,9 @@ export default function CarTable(props: { tableData: any }) {
 					CARS
 				</Text>
 			</Flex>
-			<Box>
+			<Box overflow='auto' height='400px'>
 				<Table variant='simple' color='gray.500' mb='24px' mt="12px">
-					<Thead>
+					<Thead position='sticky' top={0} zIndex={1} bg={useColorModeValue('white', 'gray.800')}>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<Tr key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
@@ -337,4 +371,3 @@ export default function CarTable(props: { tableData: any }) {
 		</Card>
 	);
 }
- 
