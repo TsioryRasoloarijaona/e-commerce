@@ -10,27 +10,28 @@ import {
 
 import Card from '../../../../components/admin/card/Card';
 import * as React from 'react';
+import useFetchAppointments from '@/app/Admin/hooks/appointments/useFetchAppointment';
 
 
 type RowObj = {
     id: string;
-    carId: string;
-    firstName: string;
+    carId: number;
+	carName: string;
     lastName: string;
     email: string;
-    contact: string;
+    contact: number;
     appointmentDate: string;
     status: string;
 };
 
 const columnHelper = createColumnHelper<RowObj>();
 
-export default function AppointmentTable(props: { tableData: any }) {
-	const { tableData } = props;
+export default function AppointmentTable({ apiUrl }: { apiUrl: string }) {
+	const { data, loading, error } = useFetchAppointments(apiUrl);
 	const [ sorting, setSorting ] = React.useState<SortingState>([]);
 	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
-	let defaultData = tableData;
+
 	const columns = [
         columnHelper.accessor('id', {
 			id: 'id',
@@ -70,15 +71,15 @@ export default function AppointmentTable(props: { tableData: any }) {
 				</Flex>
 			)
 		}),
-        columnHelper.accessor('firstName', {
-			id: 'firstName',
+		columnHelper.accessor('carName', {
+			id: 'carName',
 			header: () => (
 				<Text
 					justifyContent='space-between'
 					align='center'
 					fontSize={{ sm: '10px', lg: '12px' }}
 					color='gray.400'>
-					FIRST NAME
+					CAR NAME
 				</Text>
 			),
 			cell: (info: any) => (
@@ -97,7 +98,7 @@ export default function AppointmentTable(props: { tableData: any }) {
 					align='center'
 					fontSize={{ sm: '10px', lg: '12px' }}
 					color='gray.400'>
-					LAST NAME
+					 NAME
 				</Text>
 			),
 			cell: (info: any) => (
@@ -185,9 +186,9 @@ export default function AppointmentTable(props: { tableData: any }) {
 			)
 		})
 	];
-	const [ data, setData ] = React.useState(() => [ ...defaultData ]);
+
 	const table = useReactTable({
-		data,
+		data: data,
 		columns,
 		state: {
 			sorting
@@ -197,6 +198,10 @@ export default function AppointmentTable(props: { tableData: any }) {
 		getSortedRowModel: getSortedRowModel(),
 		debugTable: true
 	});
+
+	if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error}</div>;
+	
 	return (
 		<Card flexDirection='column' w='100%' px='0px' overflowX={{ sm: 'scroll', lg: 'hidden' }}>
 			<Flex px='25px' mb="8px" justifyContent='space-between' align='center'>
@@ -204,9 +209,9 @@ export default function AppointmentTable(props: { tableData: any }) {
 					APPOINTMENTS
 				</Text>
 			</Flex>
-			<Box>
+			<Box  overflow='auto' height='400px'>
 				<Table variant='simple' color='gray.500' mb='24px' mt="12px">
-					<Thead>
+					<Thead position='sticky' top={0} zIndex={1} bg={useColorModeValue('white', 'gray.800')}>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<Tr key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
