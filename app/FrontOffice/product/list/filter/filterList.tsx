@@ -4,9 +4,9 @@ import { getData } from '@/app/hooks/getData';
 import FilterPrice from '@/app/components/filterPrice';
 export default async function FilterList() {
 
-    const motor: string[] = await getData("http://localhost:8080/car/motorList");
-    const type : string[] = await getData("http://localhost:8080/car/typeList");
-    const prices : [number,number][] = await getData('http://localhost:8080/car/intervalPrice')
+    const motor: string[] = await getData("http://localhost:8080/car/motorList" , 'car');
+    const type : string[] = await getData("http://localhost:8080/car/typeList" , 'car');
+    const prices : [number,number][] = await getData('http://localhost:8080/car/intervalPrice' , 'car')
  
 
   return (
