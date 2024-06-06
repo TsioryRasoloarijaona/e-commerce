@@ -38,7 +38,6 @@ export default function InputFile() {
     getDownloadURL(ref(storage, `images/${refName}`))
       .then((url) => {
         urls.push(url);
-        alert(url);
       })
       .catch((error) => {
         console.log("url error : " + error);
