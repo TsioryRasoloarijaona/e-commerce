@@ -92,7 +92,7 @@ export default function Main() {
             />
           }
           name="All appointments"
-          value="2935"
+          value={appointmentByMonth}
         />
       </SimpleGrid>
 

@@ -8,8 +8,8 @@ const usePopularCar = (): string => {
       try {
         const response = await fetch('http://localhost:8080/rdv/favorite/car');
         if (response.ok) {
-          const data = await response.json();
-          setPopularCar(data.popularCar);
+          const data: [number, string] = await response.json();
+          setPopularCar(data[1]); 
         } else {
           console.error('Failed to fetch data');
         }

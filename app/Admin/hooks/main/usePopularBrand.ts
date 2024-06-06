@@ -8,8 +8,8 @@ const usePopularBrand = (): string => {
       try {
         const response = await fetch('http://localhost:8080/rdv/favorite/brand');
         if (response.ok) {
-          const data = await response.json();
-          setPopularBrand(data.popularBrand);
+          const data: [number, string] = await response.json();
+          setPopularBrand(data[1]); 
         } else {
           console.error('Failed to fetch data');
         }

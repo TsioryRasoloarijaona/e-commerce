@@ -8,8 +8,8 @@ const useAppointmentByMonth = (): number=> {
       try {
         const response = await fetch('http://localhost:8080/rdv/total/thisMonth');
         if (response.ok) {
-          const data = await response.json();
-          setAppointmentByMonth(data.appointmentByMonth);
+          const data: number = await response.json();
+          setAppointmentByMonth(data);
         } else {
           console.error('Failed to fetch data');
         }
