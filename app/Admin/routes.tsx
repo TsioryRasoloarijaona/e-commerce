@@ -1,7 +1,6 @@
 import { Icon } from '@chakra-ui/react';
 import {
   MdBarChart,
-  MdPerson,
   MdHome,
   MdLock,
   MdOutlineShoppingCart,
@@ -41,6 +40,12 @@ const routes: IRoute[] = [
     layout: '/Admin/dashboard',
     icon: <Icon as={MdBarChart} width="20px" height="20px" color="inherit" />,
     path: '/appointments',
+  },
+  {
+    name: 'Log In',
+    layout: 'Admin//auth',
+    path: '/login',
+    icon: <Icon as={MdLock} width="20px" height="20px" color="inherit" />,
   }
 ];
 
