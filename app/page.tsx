@@ -1,9 +1,9 @@
 import Hero from "./FrontOffice/hero/hero";
 import BrandFilter from "./FrontOffice/product/list/filter/brandFilter";
-import { carInterface } from "./interface/carInterface";
-import { getData } from "./hooks/getData";
-import Card from "./components/card";
-import { searchParamsCache } from "./hooks/searchParam";
+import { carInterface } from "./FrontOffice/interface/carInterface";
+import { getData } from "./FrontOffice/hooks/getData";
+import Card from "./FrontOffice/components/card";
+import { searchParamsCache } from "./FrontOffice/hooks/searchParam";
 async function Home({
   searchParams,
 }: {
@@ -33,7 +33,7 @@ async function Home({
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto pt-7">
           {car.map((el) => (
-            <div>
+            <div className="pb-3">
               <Card
                 detailLink={`/FrontOffice/product/details/${el.id}`}
                 key={el.id}

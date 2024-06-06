@@ -1,11 +1,11 @@
 import Nav from "../../hero/nav";
 import Search from "./filter/search";
-import { getData } from "@/app/hooks/getData";
-import { carInterface } from "@/app/interface/carInterface";
-import CardProduct from "@/app/components/card";
+import { getData } from "@/app/FrontOffice/hooks/getData";
+import { carInterface } from "@/app/FrontOffice/interface/carInterface";
+import CardProduct from "@/app/FrontOffice/components/card";
 import FilterList from "./filter/filterList";
-import { searchParamsCache } from "@/app/hooks/searchParam";
-import { Toast } from "@/app/components/toastComponent";
+import { searchParamsCache } from "@/app/FrontOffice/hooks/searchParam";
+import { Toast } from "@/app/FrontOffice/components/toastComponent";
 
 
 export default async function ProductList({
@@ -60,7 +60,6 @@ export default async function ProductList({
               key={el.id}
               data={el}
             />
-            <p className="text-white">{key.interval[0]}</p>
           </div>
         ))}
       </div>
