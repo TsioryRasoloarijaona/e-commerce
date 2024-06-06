@@ -2,8 +2,8 @@
 import { useState } from "react";
 import { useQueryState } from "nuqs";
 export default function BrandFilter({list} : {list: string[]}) {
-  const [selectedButton, setSelectedButton] = useState<number>(list.length-1);
   const [brand , setBrand] = useQueryState('brand', {shallow : false , defaultValue : 'pined'})
+  const [selectedButton, setSelectedButton] = useState<number>(list.indexOf(brand));
   const handleClick = (index : number , brand : string) => {
     setSelectedButton(index);
     setBrand(brand);
