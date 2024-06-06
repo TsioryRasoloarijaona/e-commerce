@@ -10,7 +10,7 @@ async function Home({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
 
-  const brandList : string []= await getData('http://localhost:8080/car/brandList')
+  const brandList : string []= await getData('http://localhost:8080/car/brandList' , 'car')
   const brandListFilter = [...brandList,'pined']
   var car: carInterface[]  = [];
   const parsedSearchParams = searchParamsCache.parse(searchParams);
@@ -19,10 +19,10 @@ async function Home({
   };
 
   if(param.brand != 'pinned'){
-    car = await getData(`http://localhost:8080/car/byBrand/${param.brand}`)
+    car = await getData(`http://localhost:8080/car/byBrand/${param.brand}` , 'car')
   }
   if(param.brand == 'pined') {
-    car = await getData("http://localhost:8080/car/pined")
+    car = await getData("http://localhost:8080/car/pined" , 'car')
   }
   return (
     <div>

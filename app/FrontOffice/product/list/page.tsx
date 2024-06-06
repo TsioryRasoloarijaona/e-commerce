@@ -27,19 +27,19 @@ export default async function ProductList({
     cars = await getData(
       `http://localhost:8080/car/motor/type/price?&motorType=${
         key.motor
-      }&type=${key.type}&priceMin=${key.interval[0]}&priceMax=${key.interval[1]}`
+      }&type=${key.type}&priceMin=${key.interval[0]}&priceMax=${key.interval[1]}` , 'car'
     );
     (cars?.length == 0 ? show = true : show = false)
   
   }
   if (key.research.length > 0) {
     cars = await getData(
-      `http://localhost:8080/car/research?&input=${key.research}`
+      `http://localhost:8080/car/research?&input=${key.research}` , 'car'
     );
     (cars?.length == 0 ? show = true : show = false)
   }
   if (cars?.length == 0) {
-    cars = await getData("http://localhost:8080/car/allCar");
+    cars = await getData("http://localhost:8080/car/allCar" , 'car');
     
   }
 
