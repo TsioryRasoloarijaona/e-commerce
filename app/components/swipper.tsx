@@ -3,21 +3,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
+import Image from "next/image";
 
-export default function SwipperComponent() {
+export function SwipperComponent({ urls }: { urls: string[] }) {
   return (
-    <div className="flex flex-row items-center h-5/6 w-5/6 p-2 bg-transparent">
-      <Swiper navigation={true} modules={[Navigation]} className="mySwiper" color="white">
-        <SwiperSlide>Slide 1</SwiperSlide>
-        <SwiperSlide>Slide 2</SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
-        <SwiperSlide>Slide 4</SwiperSlide>
-        <SwiperSlide>Slide 5</SwiperSlide>
-        <SwiperSlide>Slide 6</SwiperSlide>
-        <SwiperSlide>Slide 7</SwiperSlide>
-        <SwiperSlide>Slide 8</SwiperSlide>
-        <SwiperSlide>Slide 9</SwiperSlide>
+    <>
+      <Swiper navigation={true} modules={[Navigation]} className="mySwipe ">
+        {urls.map((url, index) => (
+          <SwiperSlide className="w-full" key={index}>
+            <div className="relative w-[800px] h-[80vh]">
+              <Image
+                src={url}
+                alt="Description de l'image"
+                layout="fill"
+                objectFit="cover"
+              />
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
-    </div>
+    </>
   );
 }

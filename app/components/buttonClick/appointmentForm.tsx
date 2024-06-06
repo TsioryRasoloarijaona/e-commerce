@@ -22,6 +22,8 @@ import { useState } from "react";
 import { PromiseToast } from "../promiseToast";
 import GoogleAuth from "@/app/hooks/googleAuth";
 import { usePersonStore } from "@/app/hooks/googleAuth";
+import { useEffect } from "react";
+const digitsOnlyRegex = /^\d+$/;
 
 const appointmentSchema = z.object({
   lastName: z
@@ -35,13 +37,26 @@ const appointmentSchema = z.object({
     .trim()
     .refine((value) => value !== "", {
       message: "Phone Number is required",
+    })
+    .refine((value) => digitsOnlyRegex.test(value), {
+      message: "Phone Number must contain only digits",
     }),
   appointmentDate: z
     .string()
     .trim()
     .refine((value) => value !== "", {
       message: "Appointment date is required",
-    }),
+    })
+    .refine(
+      (value) => {
+        const appointmentDate = new Date(value);
+        const now = new Date();
+        return appointmentDate > now;
+      },
+      {
+        message: "Appointment date must be in the future",
+      }
+    ),
   email: z
     .string()
     .email()
@@ -57,22 +72,29 @@ const appointmentSchema = z.object({
     }),
 });
 
-
 export default function AppointmentForm({ idCar }: { idCar: number }) {
   const {
     register,
     handleSubmit,
-    
+    setValue,
+    reset,
     formState: { errors },
   } = useForm<appointmentRequest>({
     resolver: zodResolver(appointmentSchema),
   });
-  
+
   const [time, setTime] = useState<number>(0);
   const [open, setOpen] = useState<boolean>(false);
   const { name, email } = usePersonStore();
 
-  const onSubmit: SubmitHandler<appointmentRequest> = async (data) => {
+  useEffect(() => {
+    setValue("lastName", name);
+    setValue("email", email);
+  }, [name, email, idCar, setValue]);
+
+  const onSubmit: SubmitHandler<appointmentRequest> = async (
+    data: appointmentRequest
+  ) => {
     const car: Car = { id: idCar };
     const body: appointmentRequest = {
       car: car,
@@ -87,9 +109,12 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
     await postData("http://localhost:8080/rdv/take", body);
     const endTime = Date.now();
     setTime(endTime - startTime);
+    reset();
   };
+  const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 1);
+const tomorrowString = tomorrow.toISOString().split('T')[0];
 
- 
 
   return (
     <div>
@@ -99,7 +124,7 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
         <ModalHeader>Appointment request </ModalHeader>
         <ModalCloseButton />
         <div className="pl-4">
-          <GoogleAuth/>
+          <GoogleAuth />
         </div>
         <form action="" onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>
@@ -110,7 +135,6 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
                 focusBorderColor="gray.300"
                 defaultValue={name}
                 {...register("lastName", { required: true })}
-                
               />
               {errors.lastName && (
                 <p className="text-red-500 text-sm">
@@ -153,6 +177,7 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
                 type="date"
                 focusBorderColor="gray.300"
                 {...register("appointmentDate", { required: true })}
+                min={tomorrowString}
               />
               {errors.appointmentDate && (
                 <p className="text-red-500 text-sm ">
