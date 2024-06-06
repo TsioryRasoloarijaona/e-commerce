@@ -1,5 +1,5 @@
 import Nav from "../../hero/nav";
-import Search from "./search";
+import Search from "./filter/search";
 import { getData } from "@/app/hooks/getData";
 import { carInterface } from "@/app/interface/carInterface";
 import CardProduct from "@/app/components/card";
@@ -46,7 +46,7 @@ export default async function ProductList({
   return (
     <div className="bg-gray-950">
       <header className="px-6 py-4 flex items-center justify-between ">
-        <Nav />
+        <Nav/>
         <Search />
       </header>
 
@@ -56,7 +56,7 @@ export default async function ProductList({
         {cars?.map((el) => (
           <div>
             <CardProduct
-              detailLink={`/FrontOffice/product/list/details/${el.id}`}
+              detailLink={`/FrontOffice/product/details/${el.id}`}
               key={el.id}
               data={el}
             />

@@ -1,5 +1,4 @@
 import Nav from "@/app/FrontOffice/hero/nav";
-import Image from "next/image";
 import CarInfo from "../carInfo";
 import { Heading } from "@chakra-ui/react";
 import ButtonAppointment from "@/app/components/buttonClick/buttonAppointment";
