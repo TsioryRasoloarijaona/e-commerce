@@ -15,7 +15,7 @@ export default function Hero() {
     >
       <div className="h-screen w-screen bg-black bg-opacity-50">
         <div className="flex items-center justify-between px-4">
-          <Nav />
+          <Nav/>
           <div className="flex items-center space-x-6">
             <Image alt="image" src={"/reanault.png"} width={60} height={60} />
             <Image alt="image" src={"/volw.png"} width={60} height={60} />
