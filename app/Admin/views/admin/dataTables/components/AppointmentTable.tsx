@@ -44,6 +44,20 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 					appointment.id === id ? { ...appointment, status: "validated" } : appointment
 				)
 			);
+			alert("Appointment validated")
+		}
+	};
+
+	const handleReject = async (id: number) => {
+		const response = await fetch(`http://localhost:8080/rdv/reject/${id}`
+			, { method: 'PUT' });
+		if (response.ok) {
+			setAppointment(prevData =>
+				prevData.map(appointment =>
+					appointment.id === id ? { ...appointment, status: "rejected" } : appointment
+				)
+			);
+			alert("Appointment rejected");
 		}
 	};
 
@@ -248,7 +262,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 						<PopoverContent>
 							<PopoverBody display='flex' flexDirection='column'>
 								<Button variant="outline" mb={2} onClick={() => handleValidate(info.row.original.id)}>Validate</Button>
-								<Button variant="outline" mb={2}>Reject</Button>
+								<Button variant="outline" mb={2} onClick={() => handleReject(info.row.original.id)}>Reject</Button>
 								<Button variant="outline">Archive</Button>
 							</PopoverBody>
 						</PopoverContent>
