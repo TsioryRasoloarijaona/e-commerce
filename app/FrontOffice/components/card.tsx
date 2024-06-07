@@ -16,50 +16,45 @@ import {
   CardFooter,
   Button,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { usePinedStore } from "../hooks/usePineStore";
 
 interface cardProps {
   data: carInterface;
   detailLink: string;
 }
 
-interface pinedCar {
-  cars: carInterface[];
-  addCar: (car: carInterface) => void;
-  removeCar: (car: carInterface) => void;
-}
 
-export const usePinedStore = create<pinedCar>((set) => ({
-  cars: [],
-  addCar: (car: carInterface) =>
-    set((state) => ({ cars: [...state.cars, car] })),
-  removeCar: (car: carInterface) =>
-    set((state) => ({ cars: state.cars.filter((c) => c.id !== car.id) })),
-}));
 
 const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
-  const { addCar, removeCar, cars } = usePinedStore();
+  const { addCar, removeCar, cars } = usePinedStore((state)=> ({
+    addCar : state.addCar,
+    removeCar : state.removeCar,
+    cars : state.cars
+  }));
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<"warning" | "success" | "error">(
     "success"
   );
   const [description, setDescirption] = useState("");
+  useEffect(()=>{
+    console.log(cars)
+  } , [cars])
   const pinClick = (car: carInterface) => {
-    if (cars.length < 6 && !cars.includes(car)) {
+   if ( !cars.includes(car) && cars.length < 6) {
       addCar(car);
     }
 
-    if (cars.length == 6) {
+    if (cars.length === 6 && !cars.includes(car)) {
       setStatus("error");
       setOpen(true);
       setDescirption("you already have 6 pined car");
     }
 
-    if (cars.includes(car)) {
+    if (cars.some(c=>c.id === car.id)) {
       removeCar(car);
     }
-
-    console.log(cars);
+   
   };
 
   return (
@@ -99,7 +94,7 @@ const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
             <Button colorScheme="transparent" onClick={() => pinClick(data)}>
               <MdPushPin
                 className={`${
-                  cars.includes(data) ? "text-white" : "text-gray-500"
+                  cars.some(c=>c.id === data.id) ? "text-white" : "text-gray-500"
                 } text-2xl`}
               />
             </Button>
