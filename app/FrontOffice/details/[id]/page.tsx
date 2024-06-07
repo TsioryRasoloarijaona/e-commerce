@@ -1,10 +1,10 @@
 import Nav from "@/app/FrontOffice/hero/nav";
 import CarInfo from "../carInfo";
 import { Heading } from "@chakra-ui/react";
-import ButtonAppointment from "@/app/components/buttonClick/buttonAppointment";
-import { SwipperComponent } from "@/app/components/swipper";
-import { carInterface } from "@/app/interface/carInterface";
-import { getData } from "@/app/hooks/getData";
+import ButtonAppointment from "@/app/FrontOffice/components/buttonClick/buttonAppointment";
+import { SwipperComponent } from "@/app/FrontOffice/components/swipper";
+import { carInterface } from "@/app/FrontOffice/interface/carInterface";
+import { getData } from "@/app/FrontOffice/hooks/getData";
 
 export default async function Page({ params }: { params: { id: number } }) {
   const car: carInterface = await getData(
