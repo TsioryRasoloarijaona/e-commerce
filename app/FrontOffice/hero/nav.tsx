@@ -20,7 +20,7 @@ export default function Nav() {
       </li>
       <li className="flex items-center gap-5 text-xl cursor-pointer">
         <FaCar className="text-2xl text-black" />
-        <Link href={"/FrontOffice/product/list"}>our car</Link>
+        <Link href={"/FrontOffice"}>our car</Link>
       </li>
       <li className="flex items-center gap-5 text-xl cursor-pointer">
         <RiContactsBook3Line className="text-2xl text-black" />

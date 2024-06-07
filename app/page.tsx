@@ -4,6 +4,7 @@ import { carInterface } from "./FrontOffice/interface/carInterface";
 import { getData } from "./FrontOffice/hooks/getData";
 import Card from "./FrontOffice/components/card";
 import { searchParamsCache } from "./FrontOffice/hooks/searchParam";
+import { PopPin } from "./FrontOffice/components/popover/popPin";
 async function Home({
   searchParams,
 }: {
@@ -11,7 +12,7 @@ async function Home({
 }) {
 
   const brandList : string []= await getData('http://localhost:8080/car/brandList' , 'car')
-  const brandListFilter = [...brandList,'latest']
+  const brandListFilter = [...brandList, 'latest']
   var car: carInterface[]  = [];
   const parsedSearchParams = searchParamsCache.parse(searchParams);
   const param = {
@@ -26,6 +27,7 @@ async function Home({
   }
   return (
     <div>
+      <PopPin/>
       <Hero />
       <div className=" bg-gray-950">
         <div className="p-5">
@@ -35,7 +37,7 @@ async function Home({
           {car.map((el) => (
             <div className="pb-3">
               <Card
-                detailLink={`/FrontOffice/product/details/${el.id}`}
+                detailLink={`/FrontOffice/details/${el.id}`}
                 key={el.id}
                 data={el}
               />

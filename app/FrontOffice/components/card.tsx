@@ -18,6 +18,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { usePinedStore } from "../hooks/usePineStore";
+import { useCountStore } from "../hooks/usePineStore";
 
 interface cardProps {
   data: carInterface;
@@ -32,6 +33,11 @@ const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
     removeCar : state.removeCar,
     cars : state.cars
   }));
+
+  const {inc , dec} = useCountStore((state)=>({
+    inc : state.inc,
+    dec : state.dec
+  }))
   const [open, setOpen] = useState(false);
   const [status, setStatus] = useState<"warning" | "success" | "error">(
     "success"
@@ -41,8 +47,9 @@ const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
     console.log(cars)
   } , [cars])
   const pinClick = (car: carInterface) => {
-   if ( !cars.includes(car) && cars.length < 6) {
+   if ( !cars.some(c=>c.id === car.id) && cars.length < 6) {
       addCar(car);
+      inc()
     }
 
     if (cars.length === 6 && !cars.includes(car)) {
@@ -53,6 +60,7 @@ const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
 
     if (cars.some(c=>c.id === car.id)) {
       removeCar(car);
+      dec()
     }
    
   };

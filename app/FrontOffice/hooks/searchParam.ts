@@ -2,7 +2,7 @@ import { createSearchParamsCache, parseAsArrayOf, parseAsString,parseAsInteger }
 
 export const searchParamsCache = createSearchParamsCache({
   research: parseAsString.withDefault(""),
-  brand: parseAsString.withDefault("pined"),
+  brand: parseAsString.withDefault("latest"),
   type: parseAsString.withDefault(""),
   motor: parseAsString.withDefault(""),
   interval : parseAsArrayOf(parseAsInteger).withDefault([])
