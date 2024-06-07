@@ -61,6 +61,19 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 		}
 	};
 
+	const handleArchive = async (id: number) => {
+		const response = await fetch(`http://localhost:8080/rdv/archive/${id}`
+			, { method: 'PUT' });
+		if (response.ok) {
+			setAppointment(prevData =>
+				prevData.map(appointment =>
+					appointment.id === id ? { ...appointment, status: "archived" } : appointment
+				)
+			);
+			alert("Appointment archived")
+		}
+	};
+
 	const renderStatus = (status: string) => {
         let color = '';
         let text = '';
@@ -263,7 +276,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 							<PopoverBody display='flex' flexDirection='column'>
 								<Button variant="outline" mb={2} onClick={() => handleValidate(info.row.original.id)}>Validate</Button>
 								<Button variant="outline" mb={2} onClick={() => handleReject(info.row.original.id)}>Reject</Button>
-								<Button variant="outline">Archive</Button>
+								<Button variant="outline" onClick={() => handleArchive(info.row.original.id)}>Archive</Button>
 							</PopoverBody>
 						</PopoverContent>
 					</Popover>
