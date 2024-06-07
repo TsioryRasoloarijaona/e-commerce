@@ -18,7 +18,6 @@ import {
 } from 'react-icons/md';
 
 import TotalAppointments from '../../views/admin/default/components/TotalAppointments';
-import WeeklyRevenue from '../../views/admin/default/components/WeeklyRevenue';
 
 import usePopularCar from '../../hooks/main/usePopularCar';
 import usePopularBrand from '../../hooks/main/usePopularBrand';
@@ -36,7 +35,7 @@ export default function Main() {
   return (
     <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>
       <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 3, '2xl': 6 }}
+        columns={{ base: 1, md: 2, lg: 2, '2xl': 6 }}
         gap="20px"
         mb="20px"
       >
@@ -98,7 +97,6 @@ export default function Main() {
 
       <SimpleGrid columns={{ base: 1, md: 2, xl: 2 }} gap="20px" mb="20px">
         <TotalAppointments />
-        <WeeklyRevenue />
       </SimpleGrid>
     </Box>
   );

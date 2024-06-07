@@ -1,6 +1,6 @@
 export const pieChartOptions = {
-    labels: [], // Les labels seront dynamiquement ajoutés
-    colors: ["#FF5733", "#33FF57", "#3357FF", "#57FF33", "#FF33A1"], // Les couleurs pour chaque segment
+    labels: [], 
+    colors: ["#FF5733", "#33FF57", "#3357FF", "#57FF33", "#FF33A1"], 
     chart: {
       type: 'pie',
     },

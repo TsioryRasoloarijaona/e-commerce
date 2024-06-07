@@ -1,34 +1,17 @@
-import { Box, Button, Flex, Icon, Select, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box,  Flex, Select, Text, useColorModeValue } from '@chakra-ui/react';
 
 import Card from '../../../../components/admin/card/Card';
-import LineChart from '../../../../components/admin/charts/LineChart';
-import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
-import { IoCheckmarkCircle } from 'react-icons/io5';
-import { MdBarChart, MdOutlineCalendarToday } from 'react-icons/md';
 import { Car } from './CarInterface';
-import { RiArrowUpSFill } from 'react-icons/ri';
-import { lineChartDataTotalSpent, lineChartOptionsTotalSpent } from '../../../../variables/charts';
 import PieChart from '@/app/Admin/components/admin/charts/PieChart';
-import { ApexOptions } from 'apexcharts'
-import { pieChartOptions } from '../../../../variables/charts';
+import { pieChartOptions } from '@/app/Admin/variables/charts';
 
-interface FetchData {
-    count: number;
-    car: Car;
-}
 export default function TotalAppointment(props: { [x: string]: any }) {
 	const { ...rest } = props;
-
-	// Chakra Color Mode
 
 	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const textColorSecondary = useColorModeValue('secondaryGray.600', 'white');
 	const boxBg = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
-	const iconColor = useColorModeValue('brand.500', 'white');
-	const bgButton = useColorModeValue('secondaryGray.300', 'whiteAlpha.100');
-	const bgHover = useColorModeValue({ bg: 'secondaryGray.400' }, { bg: 'whiteAlpha.50' });
-	const bgFocus = useColorModeValue({ bg: 'secondaryGray.300' }, { bg: 'whiteAlpha.100' });
 
 	const [ mounted, setMounted ] = useState(false);
 	const [chartData, setChartData] = useState<number[]>([]);
@@ -84,21 +67,6 @@ export default function TotalAppointment(props: { [x: string]: any }) {
 			<option value="11">November</option>
 			<option value="12">December</option>
           </Select>
-          <Button
-            ms='auto'
-            alignItems='center'
-            justifyContent='center'
-            bg={bgButton}
-            _hover={bgHover}
-            _focus={bgFocus}
-            _active={bgFocus}
-            w='37px'
-            h='37px'
-            lineHeight='100%'
-            borderRadius='10px'
-            {...rest}>
-            <MdBarChart color={iconColor} w='24px' h='24px' />
-          </Button>
         </Flex>
       </Flex>
       <Flex w='100%' flexDirection='column'>
@@ -108,7 +76,7 @@ export default function TotalAppointment(props: { [x: string]: any }) {
           </Text>
         </Flex>
         <Box minH='260px' minW='75%' mt='auto'>
-          {mounted && <PieChart chartData={chartData} chartOptions={{ ...pieChartOptions, labels: chartLabels }} />} {/* Use PieChart component */}
+          {mounted && <PieChart chartData={chartData} chartOptions={{ ...pieChartOptions, labels: chartLabels }} />} 
         </Box>
       </Flex>
     </Card>
