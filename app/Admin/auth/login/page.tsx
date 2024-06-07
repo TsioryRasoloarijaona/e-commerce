@@ -44,7 +44,7 @@ export default function LogIn() {
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
   return (
-    <AuthLayout illustrationBackground={'https://cdni.iconscout.com/illustration/premium/thumb/showroom-manager-giving-new-car-key-to-the-buyer-5727220-4788103.png?f=webp'}> 
+    <AuthLayout illustrationBackground={'https://firebasestorage.googleapis.com/v0/b/e-commerce-20aaf.appspot.com/o/undraw_My_password_re_ydq7.png?alt=media&token=585c240f-a9f0-4865-9070-e033541a04c7'}> 
       <Flex
         maxW={{ base: '100%', md: 'max-content' }}
         w="100%"
@@ -69,7 +69,7 @@ export default function LogIn() {
             fontWeight="400"
             fontSize="md"
           >
-            Enter your email and password to log in!
+            Enter your username and password to log in!
           </Text>
         </Box>
         <Flex
@@ -83,29 +83,9 @@ export default function LogIn() {
           me="auto"
           mb={{ base: '20px', md: 'auto' }}
         >
-          <Button
-            fontSize="sm"
-            me="0px"
-            mb="26px"
-            py="15px"
-            h="50px"
-            borderRadius="16px"
-            bgColor={googleBg}
-            color={googleText}
-            fontWeight="500"
-            _hover={googleHover}
-            _active={googleActive}
-            _focus={googleActive}
-          >
-            <Icon as={FcGoogle} w="20px" h="20px" me="10px" />
-            Log in with Google
-          </Button>
+          
           <Flex align="center" mb="25px">
-            <HSeparator />
-            <Text color="gray.400" mx="14px">
-              or
-            </Text>
-            <HSeparator />
+            
           </Flex>
           <FormControl>
             <FormLabel
@@ -116,15 +96,15 @@ export default function LogIn() {
               color={textColor}
               mb="8px"
             >
-              Email<Text color={brandStars}>*</Text>
+              username<Text color={brandStars}>*</Text>
             </FormLabel>
             <Input
               isRequired={true}
               variant="auth"
               fontSize="sm"
               ms={{ base: '0px', md: '0px' }}
-              type="email"
-              placeholder="mail@example.com"
+              type="text"
+              placeholder="user123......"
               mb="24px"
               fontWeight="500"
               size="lg"
@@ -158,16 +138,7 @@ export default function LogIn() {
               </InputRightElement>
             </InputGroup>
             <Flex justifyContent="space-between" align="center" mb="24px">
-              <Link href="/auth/forgot-password">
-                <Text
-                  color={textColorBrand}
-                  fontSize="sm"
-                  w="124px"
-                  fontWeight="500"
-                >
-                  Forgot password?
-                </Text>
-              </Link>
+             
             </Flex>
             <Button
               fontSize="sm"
