@@ -11,18 +11,18 @@ async function Home({
 }) {
 
   const brandList : string []= await getData('http://localhost:8080/car/brandList' , 'car')
-  const brandListFilter = [...brandList,'pined']
+  const brandListFilter = [...brandList,'latest']
   var car: carInterface[]  = [];
   const parsedSearchParams = searchParamsCache.parse(searchParams);
   const param = {
     brand: parsedSearchParams.brand || "",
   };
 
-  if(param.brand != 'pinned'){
+  if(param.brand != 'latest'){
     car = await getData(`http://localhost:8080/car/byBrand/${param.brand}` , 'car')
   }
-  if(param.brand == 'pined') {
-    car = await getData("http://localhost:8080/car/pined" , 'car')
+  if(param.brand == 'latest') {
+    car = await getData("http://localhost:8080/car/latest" , 'car')
   }
   return (
     <div>
