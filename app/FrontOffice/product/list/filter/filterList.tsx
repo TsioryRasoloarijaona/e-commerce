@@ -1,7 +1,7 @@
 import React from 'react'
-import Filter from '@/app/components/filter'
-import { getData } from '@/app/hooks/getData';
-import FilterPrice from '@/app/components/filterPrice';
+import Filter from '@/app/FrontOffice/components/filter'
+import { getData } from '@/app/FrontOffice/hooks/getData';
+import FilterPrice from '@/app/FrontOffice/components/filterPrice';
 export default async function FilterList() {
 
     const motor: string[] = await getData("http://localhost:8080/car/motorList" , 'car');

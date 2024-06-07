@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
-import { auth } from "../storage/config";
+import { auth } from "../../storage/config";
 import { Button } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import { signInWithPopup, GoogleAuthProvider } from "firebase/auth";
@@ -54,7 +54,7 @@ export default function GoogleAuth() {
   };
 
   return (
-    <Button width={"fit-content"} onClick={signIn}>
+    <Button width={"fit-content"} onClick={signIn} rounded={"full"}>
       <FcGoogle className="mr-3 text-xl" /> Google information
     </Button>
   );

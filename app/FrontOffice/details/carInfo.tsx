@@ -1,6 +1,6 @@
 import React from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
-import { carInterface } from "@/app/interface/carInterface";
+import { carInterface } from "@/app/FrontOffice/interface/carInterface";
 export default function CarInfo({car} : {car : carInterface}) {
   const select = {
     borderColor: "white",

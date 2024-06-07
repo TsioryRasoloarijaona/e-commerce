@@ -12,16 +12,16 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { ArrowForwardIcon } from "@chakra-ui/icons";
-import { appointmentRequest } from "@/app/interface/appointmentInterface";
-import { Car } from "@/app/interface/appointmentInterface";
+import { appointmentRequest } from "@/app/FrontOffice/interface/appointmentInterface";
+import { Car } from "@/app/FrontOffice/interface/appointmentInterface";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { postData } from "@/app/hooks/postData";
+import { postData } from "@/app/FrontOffice/hooks/postData";
 import { useState } from "react";
 import { PromiseToast } from "../promiseToast";
-import GoogleAuth from "@/app/hooks/googleAuth";
-import { usePersonStore } from "@/app/hooks/googleAuth";
+import GoogleAuth from "@/app/FrontOffice/hooks/googleAuth";
+import { usePersonStore } from "@/app/FrontOffice/hooks/googleAuth";
 import { useEffect } from "react";
 const digitsOnlyRegex = /^\d+$/;
 
