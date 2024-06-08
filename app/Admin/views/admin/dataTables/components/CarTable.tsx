@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Flex, IconButton, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Progress, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex, FocusLock, FormControl, FormLabel, IconButton, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Progress, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import {
 	createColumnHelper,
 	flexRender,
@@ -39,6 +39,7 @@ export default function CarTable({ tableData }: { tableData: Car[] }) {
 	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const filteredData = tableData.filter(car => car.id !== 1);
+
 
 	const handleStatusFalse = async (carId: number) => {
 		const response = await fetch(`http://localhost:8080/car/statusFalse/${carId}`
@@ -241,7 +242,7 @@ export default function CarTable({ tableData }: { tableData: Car[] }) {
 					<Text color={textColor} fontSize='sm' fontWeight='700'>
 						{info.getValue() ? 'Available' : 'Sold'}
 					</Text>
-					<IconButton aria-label='Update' icon={<EditIcon/>} onClick={() => handleStatusFalse(info.row.original.id)}/>
+					<IconButton aria-label='Update' icon={<EditIcon />} onClick={() => handleStatusFalse(info.row.original.id)} />
 				</Flex>
 			)
 		}),
