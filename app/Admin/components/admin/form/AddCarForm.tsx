@@ -9,57 +9,39 @@ import {
 } from "@chakra-ui/react";
 import InputFile from "../inputFile/inputFule";
 import { useImageStore } from "../inputFile/inputFule";
-import { useState, ChangeEvent } from "react";
+import { useForm } from "react-hook-form";
+import { carInterface } from "@/app/FrontOffice/interface/carInterface";
+import { postData } from "@/app/FrontOffice/hooks/postData";
+import { message } from "@/app/FrontOffice/interface/message";
+import dataRevalidation from "@/app/FrontOffice/hooks/dataRevalidation";
 
 export default function AddCarForm() {
-  const textColor = useColorModeValue("secondaryGray.900", "white");
-  const { urls } = useImageStore();
+  const { urls } = useImageStore((state) => ({
+    urls: state.urls,
+  }));
 
-  const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    brand: "",
-    model: "",
-    color: "",
-    motorType: "",
-    power: "",
-    placeNumber: 0,
-    status: "",
-    price: 0,
-    type: "",
-    images: [] as string[], 
-  });
-  
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const formDataToSend = { ...formData, status: formData.status.toLowerCase() === 'true' };
-    try {
-      const response = await fetch("http://localhost:8080/car/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formDataToSend),
-      });
-      if (!response.ok) {
-        throw new Error("Failed to save car");
-      }
-      console.log("Car saved successfully");
-    } catch (error) {
-      console.error("Error saving car:", error);
-    }
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<carInterface>();
+  const textColor = useColorModeValue("secondaryGray.900", "white");
+
+  const onClick = async (data: carInterface) => {
+    const car: carInterface = { ...data, images: urls };
+    const response: message = await postData(
+      "http://localhost:8080/car/save",
+      car
+    );
+    alert(response.success);
+    reset();
+    dataRevalidation("car");
   };
 
   return (
-    <Box ml={56} as="form" onSubmit={handleSubmit}>
+    <Box ml={56}>
+      <InputFile />
       <Grid
         mb="20px"
         gridTemplateColumns={{ xl: "repeat(2, 1fr)", "2xl": "1fr 0.46fr" }}
@@ -68,58 +50,60 @@ export default function AddCarForm() {
         mt="45px"
         w={600}
       >
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Name</FormLabel>
-          <Input name="name" type="text" value={formData.name} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Description</FormLabel>
-          <Input name="description" type="text" value={formData.description} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Brand</FormLabel>
-          <Input name="brand" type="text" value={formData.brand} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Model</FormLabel>
-          <Input name="model" type="text" value={formData.model} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Color</FormLabel>
-          <Input name="color" type="text" value={formData.color} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>MotorType</FormLabel>
-          <Input name="motorType" type="text" value={formData.motorType} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Power</FormLabel>
-          <Input name="power" type="text" value={formData.power} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Place number</FormLabel>
-          <Input name="placeNumber" type="number" value={formData.placeNumber} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Status</FormLabel>
-          <Input name="status" type="text" value={formData.status} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Price</FormLabel>
-          <Input name="price" type="number" value={formData.price} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Type</FormLabel>
-          <Input name="motorType" type="text" value={formData.type} onChange={handleChange} />
-        </FormControl>
-        <FormControl isRequired>
-          <FormLabel textColor={textColor}>Images</FormLabel>
-          <InputFile />({urls})         
-        </FormControl>
+        <form action="" className="text-black" onSubmit={handleSubmit(onClick)}>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>Name</FormLabel>
+            <Input type="text" {...register("name", { required: true })} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>Description</FormLabel>
+            <Input
+              type="text"
+              {...register("description", { required: true })}
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>Brand</FormLabel>
+            <Input type="text" {...register("brand", { required: true })} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>Model</FormLabel>
+            <Input type="text" {...register("model", { required: true })} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>type</FormLabel>
+            <Input type="text" {...register("type", { required: true })} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>Color</FormLabel>
+            <Input type="text" {...register("color", { required: true })} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>MotorType</FormLabel>
+            <Input type="text" {...register("motorType", { required: true })} />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>Place number</FormLabel>
+            <Input
+              type="number"
+              {...register("placeNumber", { required: true })}
+            />
+          </FormControl>
+          <FormControl isRequired>
+            <FormLabel textColor={textColor}>Price</FormLabel>
+            <Input type="number" {...register("price", { required: true })} />
+          </FormControl>
+          <Button
+            type="submit"
+            ml={64}
+            colorScheme="gray"
+            size="lg"
+            marginBlockStart={3}
+          >
+            Add car
+          </Button>
+        </form>
       </Grid>
-      <Button type="submit" ml={64} colorScheme="gray" size="lg">
-        Add car
-      </Button>
     </Box>
   );
 }
