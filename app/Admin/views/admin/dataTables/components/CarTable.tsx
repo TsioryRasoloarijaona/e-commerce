@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, Flex, Icon, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Progress, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, Flex, IconButton, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Progress, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure } from '@chakra-ui/react';
 import {
 	createColumnHelper,
 	flexRender,
@@ -13,8 +13,9 @@ import {
 import Card from '../../../../components/admin/card/Card';
 import * as React from 'react';
 import Image from 'next/image';
+import { EditIcon } from '@chakra-ui/icons'
 
-type RowObj = {
+type Car = {
 	id: number;
 	name: string;
 	description: string;
@@ -29,18 +30,18 @@ type RowObj = {
 	images: string[];
 };
 
-const columnHelper = createColumnHelper<RowObj>();
+const columnHelper = createColumnHelper<Car>();
 
-export default function CarTable({ tableData }: { tableData: RowObj[] }) {
-	const [data, setData] = React.useState<RowObj[]>(tableData);
+export default function CarTable({ tableData }: { tableData: Car[] }) {
+	const [data, setData] = React.useState<Car[]>(tableData);
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 
 	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const filteredData = tableData.filter(car => car.id !== 1);
 
-	const handlePinCar = async (carId: number) => {
-		const response = await fetch(`http://localhost:8080/car/pin/${carId}`
+	const handleStatusFalse = async (carId: number) => {
+		const response = await fetch(`http://localhost:8080/car/statusFalse/${carId}`
 			, { method: 'PUT' });
 		if (response.ok) {
 			setData(prevData =>
@@ -48,6 +49,7 @@ export default function CarTable({ tableData }: { tableData: RowObj[] }) {
 					car.id === carId ? { ...car, status: true } : car
 				)
 			);
+			alert("Status updated");
 		}
 	};
 
@@ -237,8 +239,9 @@ export default function CarTable({ tableData }: { tableData: RowObj[] }) {
 			cell: (info: any) => (
 				<Flex align='center'>
 					<Text color={textColor} fontSize='sm' fontWeight='700'>
-						{info.getValue() ? 'Pinned' : 'Not pinned'}
+						{info.getValue() ? 'Available' : 'Sold'}
 					</Text>
+					<IconButton aria-label='Update' icon={<EditIcon/>} onClick={() => handleStatusFalse(info.row.original.id)}/>
 				</Flex>
 			)
 		}),
@@ -284,15 +287,6 @@ export default function CarTable({ tableData }: { tableData: RowObj[] }) {
 							height={40}
 						/>
 					))}
-				</Flex>
-			)
-		}),
-		columnHelper.display({
-			id: 'actions',
-			header: () => <Text justifyContent='space-between' align='center' fontSize={{ sm: '10px', lg: '12px' }} color='gray.400'>ACTIONS</Text>,
-			cell: (info: any) => (
-				<Flex align='center'>
-					<Button size='sm' ml={10} onClick={() => handlePinCar(info.row.original.id)}>Pin</Button>
 				</Flex>
 			)
 		})
