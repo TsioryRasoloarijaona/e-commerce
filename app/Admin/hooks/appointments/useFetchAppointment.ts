@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 type Appointment = {
-    id: string;
+    id: number;
     carId: number;
     carName: string;
     lastName: string;
