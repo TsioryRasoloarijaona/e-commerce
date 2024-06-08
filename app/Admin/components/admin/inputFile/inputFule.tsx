@@ -54,15 +54,18 @@ export default function InputFile() {
         updateUrls(urls);
       });
     });
+    if(urls.length > 0){
+      alert('images uploaded')
+    }
   };
   return (
-    <div>
+    <div className="flex w-fit items-center border rounded-full justify-between text-black">
       <label
         htmlFor=""
-        className="flex items-center border rounded-full w-fit gap-5"
+        className="flex items-center w-fit gap-5"
       >
         <input
-          className="text-black absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          className=" cursor-pointer"
           type="file"
           onChange={(event) => {
             setFile(event.target.files);
@@ -70,19 +73,13 @@ export default function InputFile() {
           }}
           multiple
         />
-        <span className=" text-black px-3 py-3 text-xl ">
-          <RiImageAddLine />
-        </span>
-        <span className=" text-black   rounded-full  ">
-          {count} selected files
-        </span>
-        <button
-          className="px-3 py-2 text-white bg-gray-800 flex items-center gap-3 rounded-full"
-          onClick={upload}
-        >
-          upload <GoUpload />
-        </button>
       </label>
+      <button
+        className="px-3 py-2 text-white bg-gray-800 flex items-center gap-3 rounded-full"
+        onClick={upload}
+      >
+        upload <GoUpload />
+      </button>
     </div>
   );
 }
