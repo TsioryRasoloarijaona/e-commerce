@@ -12,3 +12,7 @@ export interface carInterface{
   motorType: "diesel" | "petrol";
   images: string[];
 }
+
+export interface content {
+  content : carInterface[]
+}

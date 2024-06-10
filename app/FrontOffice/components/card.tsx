@@ -68,7 +68,7 @@ const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
   return (
     <div className="mx-auto">
       <Toast status={status} shouldShow={open} description={description} />
-      <Card maxW="lg" backgroundColor={"grey.400"} borderRadius={0}>
+      <Card maxW="md" backgroundColor={"grey.400"} borderRadius={0}>
         <CardBody>
           <div className="w-full h-[300px] relative overflow-hidden ">
             <Image

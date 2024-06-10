@@ -1,19 +1,22 @@
 import Nav from "./hero/nav";
 import Search from "./product/list/filter/search";
 import { getData } from "@/app/FrontOffice/hooks/getData";
-import { carInterface } from "@/app/FrontOffice/interface/carInterface";
+import { carInterface , content } from "@/app/FrontOffice/interface/carInterface";
 import CardProduct from "@/app/FrontOffice/components/card";
 import FilterList from "./product/list/filter/filterList";
 import { searchParamsCache } from "@/app/FrontOffice/hooks/searchParam";
 import { Toast } from "@/app/FrontOffice/components/toastComponent";
 import { PopPin } from "./components/popover/popPin";
+import Pagination from "./components/pagination";
+
 
 export default async function ProductList({
   searchParams,
 }: {
   searchParams: Record<string, string | string[] | undefined>;
 }) {
-  var cars: carInterface[] | null = [];
+  var cars: carInterface[] | null  = [];
+  const carPages  : number= await getData('http://localhost:8080/car/totalPage' , 'car')
   let show = false;
   const parsedSearchParams = searchParamsCache.parse(searchParams);
   const key = {
@@ -21,6 +24,7 @@ export default async function ProductList({
     motor: parsedSearchParams.motor || "",
     research: parsedSearchParams.research || "",
     interval: parsedSearchParams.interval || [],
+    page : parsedSearchParams.page || 0
   };
 
   if (
@@ -42,7 +46,7 @@ export default async function ProductList({
     cars?.length == 0 ? (show = true) : (show = false);
   }
   if (cars?.length == 0) {
-    cars = await getData("http://localhost:8080/car/allCar", "car");
+    cars = await getData(`http://localhost:8080/car/page/${key.page}`, "car");
   }
 
   return (
@@ -71,6 +75,9 @@ export default async function ProductList({
               />
             </div>
           ))}
+        </div>
+        <div className="flex justify-center py-6">
+          <Pagination page={carPages}/>
         </div>
       </div>
     </>
