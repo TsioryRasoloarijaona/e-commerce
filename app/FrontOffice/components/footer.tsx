@@ -22,7 +22,7 @@ export default function Footer() {
 
   async function sendMessage(data: Send) {
     const response: message = await postData(
-      "http://localhost:8080/rdv/message",
+      "https://e-car.onrender.com/rdv/message",
       data.message
     );
     setOpen(true);

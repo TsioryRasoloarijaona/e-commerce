@@ -19,7 +19,7 @@ export default async function ProductList({
 }) {
   var cars: carInterface[] | null = [];
   const carPages: number = await getData(
-    "http://localhost:8080/car/totalPage",
+    "https://e-car.onrender.com/car/totalPage",
     "car"
   );
   let show = false;
@@ -38,20 +38,20 @@ export default async function ProductList({
     key.interval.length == 2
   ) {
     cars = await getData(
-      `http://localhost:8080/car/motor/type/price?&motorType=${key.motor}&type=${key.type}&priceMin=${key.interval[0]}&priceMax=${key.interval[1]}`,
+      `https://e-car.onrender.com/car/motor/type/price?&motorType=${key.motor}&type=${key.type}&priceMin=${key.interval[0]}&priceMax=${key.interval[1]}`,
       "car"
     );
     cars?.length == 0 ? (show = true) : (show = false);
   }
   if (key.research.length > 0) {
     cars = await getData(
-      `http://localhost:8080/car/research?&input=${key.research}`,
+      `https://e-car.onrender.com/car/research?&input=${key.research}`,
       "car"
     );
     cars?.length == 0 ? (show = true) : (show = false);
   }
   if (cars?.length == 0) {
-    cars = await getData(`http://localhost:8080/car/page/${key.page}`, "car");
+    cars = await getData(`https://e-car.onrender.com/car/page/${key.page}`, "car");
   }
 
   return (
@@ -71,11 +71,11 @@ export default async function ProductList({
           status="warning"
         />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto bg-gray-950 pt-7">
-          {cars?.map((el) => (
+          {cars?.map((el , index) => (
             <div>
               <CardProduct
                 detailLink={`/FrontOffice/details/${el.id}`}
-                key={el.id}
+                key={index}
                 data={el}
               />
             </div>

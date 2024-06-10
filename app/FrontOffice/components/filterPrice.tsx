@@ -54,11 +54,12 @@ const FilterPrice: React.FC<filterProps> = ({ option, menu }) => {
           >
             {option}
           </MenuItem>
-          {menu.map((menu) => (
+          {menu.map((menu,index) => (
             <MenuItem
               onClick={() => keyWord(menu)}
               backgroundColor={"gray.800"}
               color={"white"}
+              key={index}
             >
               {formatter(menu[0]) + " - " + formatter(menu[1])}
             </MenuItem>
