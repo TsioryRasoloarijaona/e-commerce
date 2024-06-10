@@ -30,7 +30,7 @@ async function Home({
       <PopPin/>
       <Hero />
       <div className=" bg-gray-950">
-        <div className="p-5">
+        <div className="sticky top-0 z-10 p-5 bg-gray-950">
           <BrandFilter list={brandListFilter}/>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto pt-7">

@@ -23,8 +23,8 @@ const [pagination , setPagination] = useQueryState<number>('page'  ,parseAsInteg
       {pageList.map((el) => (
         <div
           className={`${
-            active === el ? "border border-white" : ""
-          }  px-3 py-1 cursor-pointer text-white`}
+            active === el ? "border border-white bg-white text-black" : "text-white"
+          }  px-3 py-1 cursor-pointer `}
           onClick={() => click(el)}
         >
           {el}
