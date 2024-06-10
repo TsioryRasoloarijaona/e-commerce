@@ -129,7 +129,7 @@ const tomorrowString = tomorrow.toISOString().split('T')[0];
         <form action="" onSubmit={handleSubmit(onSubmit)}>
           <ModalBody>
             <FormControl mt={4}>
-              <FormLabel>name</FormLabel>
+              <FormLabel fontSize={"small"}>name</FormLabel>
               <Input
                 placeholder="name"
                 focusBorderColor="gray.300"
@@ -143,7 +143,7 @@ const tomorrowString = tomorrow.toISOString().split('T')[0];
               )}
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>email</FormLabel>
+              <FormLabel fontSize={"small"}>email</FormLabel>
 
               <Input
                 placeholder="@gmail.com"
@@ -158,7 +158,7 @@ const tomorrowString = tomorrow.toISOString().split('T')[0];
               )}
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>phone number</FormLabel>
+              <FormLabel fontSize={"small"}>phone number</FormLabel>
               <Input
                 type="tel"
                 placeholder="+03305654545"
@@ -170,7 +170,7 @@ const tomorrowString = tomorrow.toISOString().split('T')[0];
               )}
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>date</FormLabel>
+              <FormLabel fontSize={"small"}>date</FormLabel>
               <Input
                 placeholder="Select Date and Time"
                 size="md"
@@ -186,7 +186,7 @@ const tomorrowString = tomorrow.toISOString().split('T')[0];
               )}
             </FormControl>
             <FormControl mt={4}>
-              <FormLabel>Message</FormLabel>
+              <FormLabel fontSize={"small"}>Message</FormLabel>
               <Textarea
                 placeholder="write your message here ......."
                 focusBorderColor="gray.300"

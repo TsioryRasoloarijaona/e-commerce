@@ -5,5 +5,6 @@ export const searchParamsCache = createSearchParamsCache({
   brand: parseAsString.withDefault("latest"),
   type: parseAsString.withDefault(""),
   motor: parseAsString.withDefault(""),
-  interval : parseAsArrayOf(parseAsInteger).withDefault([])
+  interval : parseAsArrayOf(parseAsInteger).withDefault([]),
+  page : parseAsInteger.withDefault(0)
 });

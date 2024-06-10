@@ -16,25 +16,25 @@ export default function CarInfo({car} : {car : carInterface}) {
         <TabPanels>
           <TabPanel>
             <div className="grid grid-cols-3 gap-6 mb-16 text-sm mt-4">
-              <div className="border border-gray-700 w-fit py-2 px-5 rounded-2xl">
+              <div className="border border-gray-700 w-fit py-2 px-5 rounded-full">
                 <p>model - {car.model} </p>
               </div>
-              <div className="border border-gray-700 w-fit py-2 px-5 rounded-2xl">
+              <div className="border border-gray-700 w-fit py-2 px-5 rounded-full">
                 <p>sit number - {car.placeNumber} </p>
               </div>
-              <div className="border border-gray-700 w-fit py-2 px-5 rounded-2xl">
+              <div className="border border-gray-700 w-fit py-2 px-5 rounded-full">
                 <p>engine - {car.motorType} </p>
               </div>
-              <div className="border border-gray-700 w-fit py-2 px-5 rounded-2xl">
+              <div className="border border-gray-700 w-fit py-2 px-5 rounded-full">
                 <p>type - {car.type} </p>
               </div>
-              <div className="border border-gray-700 w-fit py-2 px-5 rounded-2xl">
+              <div className="border border-gray-700 w-fit py-2 px-5 rounded-full">
                 <p>brand - {car.brand} </p>
               </div>
             </div>
 
-            <div className="border border-gray-700 w-fit py-2 px-5 rounded-2xl text-sm">
-                <p className="leading-9">description - {car.description} </p>
+            <div className="border border-gray-700 w-fit py-2 px-5 rounded-full text-sm">
+                <p className="">description - {car.description} </p>
               </div>
           </TabPanel>
         </TabPanels>

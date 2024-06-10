@@ -12,7 +12,9 @@ import {
 
 import { useCountStore } from "../../hooks/usePineStore";
 import { usePinedStore } from "../../hooks/usePineStore";
+import { FaArrowRight } from "react-icons/fa6";
 import Link from "next/link";
+import { TiPin } from "react-icons/ti";
 
 export const PopPin = () => {
 
@@ -27,8 +29,8 @@ export const PopPin = () => {
     <div className="fixed top-1/2 right-4 transform -translate-y-1/2 z-50 ">
       <Popover>
         <PopoverTrigger>
-          <Button rounded={"full"} _hover={{ colorScheme: "gray.800" }}>
-            pin({count})
+          <Button rounded={"full"} _hover={{ colorScheme: "gray.800" }} marginInline={"auto"}>
+          <TiPin className="text-2xl"/> {count}
           </Button>
         </PopoverTrigger>
 
@@ -39,10 +41,10 @@ export const PopPin = () => {
           <PopoverBody>
             <ul>
               {cars.map((el)=>
-              <li className="space-x-4 flex">
+              <li className="space-x-4 flex justify-between">
                 <p>{el.name}</p>
                 <span>
-                  <Link href={`FrontOffice/details/${el.id}`} className="text-blue-500 underline text-sm">details</Link>
+                  <Link href={`FrontOffice/details/${el.id}`} className="text-blue-500 underline text-sm"><FaArrowRight /></Link>
                 </span>
               </li>
               )}
