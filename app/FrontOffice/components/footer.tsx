@@ -46,6 +46,9 @@ export default function Footer() {
         <p className="flex items-center gap-3">
           <BsPinterest className="" /> pintest/hack
         </p>
+        <p>
+        © 2024eCar, car dealer. All rights Reserved. Made byHacktivistes!!!
+        </p>
       </div>
       <div className="w-3/4 mx-auto text-gray-400">
         <form onSubmit={handleSubmit(sendMessage)}>
