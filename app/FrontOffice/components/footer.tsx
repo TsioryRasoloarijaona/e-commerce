@@ -47,10 +47,10 @@ export default function Footer() {
           <BsPinterest className="" /> pintest/hack
         </p>
         <p>
-        © 2024eCar, car dealer. All rights Reserved. Made byHacktivistes!!!
+          © 2024eCar, car dealer. All rights Reserved. Made byHacktivistes!!!
         </p>
       </div>
-      <div className="w-3/4 mx-auto text-gray-400">
+      <div className="w-3/4 mx-auto text-gray-400 gap-3">
         <form onSubmit={handleSubmit(sendMessage)}>
           <FormLabel fontSize={"small"}>Message</FormLabel>
           <Textarea
@@ -59,9 +59,14 @@ export default function Footer() {
             fontSize={"small"}
             {...register("message", { required: true })}
           />
-          <button type="submit" className="mt-2 px-4 py-2 bg-white text-black text-sm rounded">
-            Send
-          </button>
+          
+            <button
+              type="submit"
+              className="mt-6 px-4 py-2 bg-white text-black text-sm rounded text-right"
+            >
+              Send
+            </button>
+        
         </form>
       </div>
     </div>

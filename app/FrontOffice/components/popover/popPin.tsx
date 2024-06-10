@@ -37,12 +37,12 @@ export const PopPin = () => {
         <PopoverContent background={"whitesmoke"}>
           <PopoverArrow />
           <PopoverCloseButton />
-          <PopoverHeader>pined cars</PopoverHeader>
+          <PopoverHeader color={"black"}>pined cars</PopoverHeader>
           <PopoverBody>
             <ul>
               {cars.map((el)=>
               <li className="space-x-4 flex justify-between">
-                <p>{el.name}</p>
+                <p className="text-black">{el.name}</p>
                 <span>
                   <Link href={`FrontOffice/details/${el.id}`} className="text-blue-500 underline text-sm"><FaArrowRight /></Link>
                 </span>
