@@ -1,4 +1,4 @@
-import React from 'react';
+import {useRef , RefObject } from 'react';
 
 import {
   Box,
@@ -72,7 +72,8 @@ export function SidebarResponsive(props: SidebarResponsiveProps) {
   let sidebarBackgroundColor = useColorModeValue('white', 'navy.800');
   let menuColor = useColorModeValue('gray.400', 'white');
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const btnRef = React.useRef();
+
+  const btnRef: RefObject<HTMLDivElement> = useRef<HTMLDivElement>(null);
 
   const { routes } = props;
 
