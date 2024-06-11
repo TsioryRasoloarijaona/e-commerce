@@ -20,12 +20,13 @@ const [pagination , setPagination] = useQueryState<number>('page'  ,parseAsInteg
   };
   return (
     <div className="w-fit flex items-center">
-      {pageList.map((el) => (
+      {pageList.map((el , index) => (
         <div
           className={`${
             active === el ? "border border-white bg-white text-black" : "text-white"
           }  px-3 py-1 cursor-pointer `}
           onClick={() => click(el)}
+          key={index}
         >
           {el}
         </div>

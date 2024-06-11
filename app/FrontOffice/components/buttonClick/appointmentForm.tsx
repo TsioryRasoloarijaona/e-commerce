@@ -106,7 +106,7 @@ export default function AppointmentForm({ idCar }: { idCar: number }) {
     };
     setOpen(true);
     const startTime = Date.now();
-    await postData("http://localhost:8080/rdv/take", body);
+    await postData("https://e-car.onrender.com/rdv/take", body);
     const endTime = Date.now();
     setTime(endTime - startTime);
     reset();

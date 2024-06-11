@@ -16,7 +16,7 @@ export default function BrandFilter({list} : {list: string[]}) {
 
       {list.map((el , index)=>
       <button  className={`${selectedButton === index ? 'bg-white text-black' : 'bg-transparent text-white'}  px-4 py-2 border border-gray-700 rounded-full mb-2`}
-      onClick={()=>handleClick(index , el)}>
+      onClick={()=>handleClick(index , el)} key={index}>
         {el}
       </button>
     )}

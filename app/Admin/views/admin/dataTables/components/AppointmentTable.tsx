@@ -33,7 +33,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 	const textColor = useColorModeValue('secondaryGray.900', 'white');
 	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 
-	const [appointment, setAppointment] = React.useState<Appointment[]>(tableData);
+	const [appointment, setAppointment] = useState<Appointment[]>(tableData);
 
 	const handleValidate = async (id: number) => {
 		const response = await fetch(`http://localhost:8080/rdv/validate/${id}`

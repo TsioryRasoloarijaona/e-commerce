@@ -11,7 +11,7 @@ async function Home({
   searchParams: Record<string, string | string[] | undefined>;
 }) {
 
-  const brandList : string []= await getData('http://localhost:8080/car/brandList' , 'car')
+  const brandList : string []= await getData('https://e-car.onrender.com/car/brandList' , 'car')
   const brandListFilter = [...brandList, 'latest']
   var car: carInterface[]  = [];
   const parsedSearchParams = searchParamsCache.parse(searchParams);
@@ -20,10 +20,10 @@ async function Home({
   };
 
   if(param.brand != 'latest'){
-    car = await getData(`http://localhost:8080/car/byBrand/${param.brand}` , 'car')
+    car = await getData(`https://e-car.onrender.com/car/byBrand/${param.brand}` , 'car')
   }
   if(param.brand == 'latest') {
-    car = await getData("http://localhost:8080/car/latest" , 'car')
+    car = await getData("https://e-car.onrender.com/car/latest" , 'car')
   }
   return (
     <div>
@@ -34,11 +34,11 @@ async function Home({
           <BrandFilter list={brandListFilter}/>
         </div>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto pt-7">
-          {car.map((el) => (
+          {car.map((el , index) => (
             <div className="pb-3">
               <Card
                 detailLink={`/FrontOffice/details/${el.id}`}
-                key={el.id}
+                key={index}
                 data={el}
               />
             </div>

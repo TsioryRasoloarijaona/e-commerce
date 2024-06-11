@@ -8,7 +8,7 @@ import { getData } from "@/app/FrontOffice/hooks/getData";
 
 export default async function Page({ params }: { params: { id: number } }) {
   const car: carInterface = await getData(
-    `http://localhost:8080/car/byId/${params.id}` , 'car'
+    `https://e-car.onrender.com/car/byId/${params.id}` , 'car'
   );
   return (
     <>
