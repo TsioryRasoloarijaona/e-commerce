@@ -34,6 +34,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 	const borderColor = useColorModeValue('gray.200', 'whiteAlpha.100');
 
 	const [appointment, setAppointment] = useState<Appointment[]>(tableData);
+	const theadColor = useColorModeValue('white', 'gray.800');
 
 	const handleValidate = async (id: number) => {
 		const response = await fetch(`http://localhost:8080/rdv/validate/${id}`
@@ -299,6 +300,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 
 	if (loading) return <div>Loading...</div>;
 	if (error) return <div>Error: {error}</div>;
+	
 
 	return (
 		<Card flexDirection='column' w='100%' px='0px' overflowX={{ sm: 'scroll', lg: 'hidden' }}>
@@ -309,7 +311,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 			</Flex>
 			<Box overflow='auto' height='400px'>
 				<Table variant='simple' color='gray.500' mb='24px' mt="12px">
-					<Thead position='sticky' top={0} zIndex={1} bg={useColorModeValue('white', 'gray.800')}>
+					<Thead position='sticky' top={0} zIndex={1} bg={theadColor}>
 						{table.getHeaderGroups().map((headerGroup) => (
 							<Tr key={headerGroup.id}>
 								{headerGroup.headers.map((header) => {
