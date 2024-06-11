@@ -31,7 +31,7 @@ export default function Footer() {
   }
 
   return (
-    <div className="bg-black text-white px-5 py-10 grid grid-cols-2 text-sm">
+    <div className="bg-black text-white px-5 py-10 grid lg:grid-cols-2 grid-cols-1  text-sm">
       <Toast shouldShow={open} description={description} status="success" />
       <div className="flex flex-col space-y-6 mx-auto text-gray-400">
         <p className="flex items-center gap-3">
