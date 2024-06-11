@@ -72,10 +72,10 @@ export default async function ProductList({
         />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto bg-gray-950 pt-7">
           {cars?.map((el , index) => (
-            <div>
+            <div key={index}>
               <CardProduct
                 detailLink={`/FrontOffice/details/${el.id}`}
-                key={index}
+                
                 data={el}
               />
             </div>
