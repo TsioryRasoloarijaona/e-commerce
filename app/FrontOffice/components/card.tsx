@@ -83,11 +83,7 @@ const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
             <Heading fontSize={"2xl"} color={"white"}>
               {data.name}
             </Heading>
-            <div className="h-[65px] overflow-y-hidden">
-              <Text color="white" fontSize="small" lineHeight={6}>
-                {data.description}
-              </Text>
-            </div>
+
             <Text color="white" fontSize="2xl" fontWeight={"bold"}>
               {formatter(data.price)}
             </Text>
