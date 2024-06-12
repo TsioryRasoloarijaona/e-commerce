@@ -15,13 +15,53 @@ export default function Hero() {
     >
       <div className="h-screen w-screen bg-black bg-opacity-50">
         <div className="flex items-center justify-between px-4">
-          <Nav/>
-          <div className="flex items-center space-x-6">
-            <Image alt="image" src={"/reanault.png"} width={60} height={60} />
-            <Image alt="image" src={"/volw.png"} width={60} height={60} />
-            <Image alt="image" src={"/mercedes.png"} width={100} height={100} />
-            <Image alt="image" src={"/toyota.png"} width={90} height={90} />
-            <Image alt="image" src={"/citroe.png"} width={80} height={80} />
+          <Nav />
+          <div className="grid lg:grid-cols-5 grid-cols-2 items-center space-x-3 py-2">
+            <div className="w-[60px] h-[60px] relative">
+              <Image
+                alt="image"
+                src={"/reanault.png"}
+                layout="fill"
+                objectFit="cover"
+                className="absolute top-0 left-0"
+              />
+            </div>
+            <div className="w-[60px] h-[60px] relative">
+              <Image
+                alt="image"
+                src={"/volw.png"}
+                layout="fill"
+                objectFit="cover"
+                className="absolute top-0 left-0"
+              />
+            </div>
+            <div className="w-[60px] h-[60px] relative">
+              <Image
+                alt="image"
+                src={"/mercedes.png"}
+                layout="fill"
+                objectFit="cover"
+                className="absolute top-0 left-0"
+              />
+            </div>
+            <div className="w-[60px] h-[60px] relative">
+              <Image
+                alt="image"
+                src={"/toyota.png"}
+                layout="fill"
+                objectFit="cover"
+                className="absolute top-0 left-0"
+              />
+            </div>
+            <div className="w-[60px] h-[60px] relative">
+              <Image
+                alt="image"
+                src={"/citroe.png"}
+                layout="fill"
+                objectFit="cover"
+                className="absolute top-0 left-0"
+              />
+            </div>
           </div>
         </div>
         <div className="flex flex-col justify-end h-5/6">
