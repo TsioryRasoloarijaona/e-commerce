@@ -12,19 +12,19 @@ export default async function Page({ params }: { params: { id: number } }) {
   );
   return (
     <>
-      <div className="h-screen overflow-y-hidden">
+      <div className="lg:h-screen h-fit overflow-y-hidden">
         <header className="bg-gray-950 p-4 flex flex-row items-center">
           <Nav></Nav>
           <Heading className="text-white mx-auto" size={"xl"}>
             {car.name}
           </Heading>
         </header>
-        <div className="bg-gray-950 grid grid-cols-2 h-[95vh] w-screen">
+        <div className="bg-gray-950 grid lg:grid-cols-2 grid-cols-1 lg:h-[95vh] h-fit w-screen">
           <div className="p-3">
             <SwipperComponent urls={car.images} />
           </div>
 
-          <div className="px-7 py-4">
+          <div className="px-7 py-4 h-fit">
             <div className="h-3/4">
               <CarInfo car={car} />
             </div>

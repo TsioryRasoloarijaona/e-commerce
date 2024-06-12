@@ -21,7 +21,7 @@ async function Home({
     brand: parsedSearchParams.brand || "",
   };
 
-  if (param.brand != "latest") {
+  if (param.brand == "latest") {
     car = await getData(
       `https://e-car.onrender.com/car/byBrand/${param.brand}`,
       "car"
