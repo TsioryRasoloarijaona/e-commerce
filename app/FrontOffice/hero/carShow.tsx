@@ -1,11 +1,10 @@
-"use client";
+
 import ButtonAppointment from "../components/buttonClick/buttonAppointment";
 import Link from "next/link";
-import React, { useRef, useState } from "react";
-import Nav from "./nav";
+
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import HeroCaroussel from "./heroCaroussel";
+
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -36,13 +35,13 @@ export default function CarShow({car} : {car : carInterface[]}) {
               <div className="p-3"></div>
               <div className="h-[80vh]">
                 <div className="h-5/6">
-                  <h1 className="text-center uppercase font-extrabold text-5xl flex items-center h-1/2 justify-center">
+                  <h1 className="text-center uppercase font-extrabold text-5xl flex items-center h-1/2 justify-center text-white">
                     {el.name}
                   </h1>
                 </div>
                 <div className="text-center flex justify-center gap-5 font-bold items-center">
                   <ButtonAppointment idCar={el.id}></ButtonAppointment>
-                  <Link href={`/FrontOffice/details/${el.id}`}>details</Link>
+                  <Link href={`/FrontOffice/details/${el.id}`} className="text-white">details</Link>
                 </div>
               </div>
             </div>
