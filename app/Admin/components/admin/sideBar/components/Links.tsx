@@ -34,7 +34,8 @@ interface SidebarLinksProps {
         if (
           route.layout === '/Admin/dashboard' ||
           route.layout === '/auth' ||
-          route.layout === '/rtl'
+          route.layout === '/rtl' ||
+          route.layout === '/login'
         ) {
           return (
             <Link key={index} href={route.layout + route.path}>
