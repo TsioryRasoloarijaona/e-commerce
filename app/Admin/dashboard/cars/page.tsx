@@ -15,9 +15,6 @@ const CarsPage = () => {
       }
       const data = await res.json();
       setCarTableData(data);
-
-      res.headers.append('Cache-Control', 'no-cache, no-store, must-revalidate');
-      res.headers.append('Pragma', 'no-cache');
     };
 
     fetchCars();

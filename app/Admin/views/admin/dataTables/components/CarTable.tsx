@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, Button, ButtonGroup, Flex, FocusLock, FormControl, FormLabel, IconButton, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Progress, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure } from '@chakra-ui/react';
+import { Box, Button, ButtonGroup, Flex, FocusLock, FormControl, FormLabel, IconButton, Input, Popover, PopoverArrow, PopoverBody, PopoverCloseButton, PopoverContent, PopoverHeader, PopoverTrigger, Progress, Stack, Table, Tbody, Td, Text, Th, Thead, Tr, useColorModeValue, useDisclosure, useToast } from '@chakra-ui/react';
 import {
 	createColumnHelper,
 	flexRender,
@@ -13,7 +13,8 @@ import {
 import Card from '../../../../components/admin/card/Card';
 import * as React from 'react';
 import Image from 'next/image';
-import { EditIcon } from '@chakra-ui/icons'
+import { CheckIcon, EditIcon } from '@chakra-ui/icons'
+import { useState } from 'react';
 
 type Car = {
 	id: number;
@@ -54,6 +55,20 @@ export default function CarTable({ tableData }: { tableData: Car[] }) {
 		}
 	};
 
+	const handlePriceUpdate = async (id: number, price: number) => {
+		try {
+			const response = await fetch(`http://localhost:8080/priceUpdate?price=${price}&id=${id}`, {
+				method: 'PUT',
+			});
+			if (!response.ok) {
+				throw new Error('Failed to update price');
+			}
+			return true;
+		} catch (error) {
+			console.error('Error updating price:', error);
+			return false;
+		}
+	};
 	const columns = [
 		columnHelper.accessor('id', {
 			id: 'id',
@@ -257,40 +272,72 @@ export default function CarTable({ tableData }: { tableData: Car[] }) {
 					PRICE
 				</Text>
 			),
-			cell: (info: any) => (
-				<Flex align='center'>
-					<Text color={textColor} fontSize='sm' fontWeight='700'>
-						{info.getValue()}
-					</Text>
-				</Flex>
-			)
+			cell: (info: any) => {
+				const [newPrice, setNewPrice] = useState(info.getValue());
+				const [isSaving, setIsSaving] = useState(false);
+			
+				const handleSaveClick = async () => {
+				  setIsSaving(true);
+				  const success = await handlePriceUpdate(info.row.original.id, newPrice);
+				  setIsSaving(false);
+				  if (!success) {
+					console.error('Failed to update price');
+				  }
+				};
+			
+				return (
+				  <Flex w={256} align='center'>
+					<Input
+					  value={newPrice}
+					  onChange={(e) => {
+						console.log("Input changed:", e.target.value);
+						setNewPrice(Number(e.target.value));
+					  }}
+					  placeholder='price'
+					  type='number'
+					  size='sm'
+					  width='70px'
+					  mr='2'
+					/>
+					<IconButton
+					  aria-label='Save'
+					  icon={<CheckIcon />}
+					  size='sm'
+					  onClick={handleSaveClick}
+					  isLoading={isSaving}
+					/>
+				  </Flex>
+				);
+			  }
 		}),
-		columnHelper.accessor('images', {
-			id: 'images',
-			header: () => (
-				<Text
-					justifyContent='space-between'
-					align='center'
-					fontSize={{ sm: '10px', lg: '12px' }}
-					color='gray.400'>
-					IMAGES
-				</Text>
-			),
-			cell: (info: any) => (
-				<Flex align='center'>
-					{info.getValue().map((imageUrl: string, index: number) => (
-						<Image
-							key={index}
-							src={imageUrl}
-							alt={`Car image ${index + 1}`}
-							objectFit='cover'
-							width={40}
-							height={40}
-						/>
-					))}
-				</Flex>
-			)
-		})
+
+
+		// columnHelper.accessor('images', {
+		// 	id: 'images',
+		// 	header: () => (
+		// 		<Text
+		// 			justifyContent='space-between'
+		// 			align='center'
+		// 			fontSize={{ sm: '10px', lg: '12px' }}
+		// 			color='gray.400'>
+		// 			IMAGES
+		// 		</Text>
+		// 	),
+		// 	cell: (info: any) => (
+		// 		<Flex align='center'>
+		// 			{info.getValue().map((imageUrl: string, index: number) => (
+		// 				<Image
+		// 					key={index}
+		// 					src={imageUrl}
+		// 					alt={`Car image ${index + 1}`}
+		// 					objectFit='cover'
+		// 					width={40}
+		// 					height={40}
+		// 				/>
+		// 			))}
+		// 		</Flex>
+		// 	)
+		// })
 	];
 
 	const table = useReactTable({
