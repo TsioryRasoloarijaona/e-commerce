@@ -1,6 +1,7 @@
-
+"use client";
 import ButtonAppointment from "../components/buttonClick/buttonAppointment";
 import Link from "next/link";
+
 
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -35,7 +36,7 @@ export default function CarShow({car} : {car : carInterface[]}) {
               <div className="p-3"></div>
               <div className="h-[80vh]">
                 <div className="h-5/6">
-                  <h1 className="text-center uppercase font-extrabold text-5xl flex items-center h-1/2 justify-center text-white">
+                  <h1 className="text-center uppercase font-extrabold text-5xl flex items-center h-1/2 justify-center text-white italic">
                     {el.name}
                   </h1>
                 </div>
