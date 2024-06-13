@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: { id: number } }) {
             <SwipperComponent urls={car.images} />
           </div>
 
-          <div className="px-7 py-4 h-fit">
+          <div className="px-7 py-4 lg:h-full h-fit">
             <div className="h-3/4">
               <CarInfo car={car} />
             </div>

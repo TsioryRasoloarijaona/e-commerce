@@ -26,7 +26,7 @@ export const PopPin = () => {
     cars : state.cars
   }))
   return (
-    <div className="fixed top-1/2 right-[2vw] transform -translate-y-1/2 z-50 ">
+    <div className="fixed top-1/2 right-[2vw] transform -translate-y-1/3 z-50 ">
       <Popover>
         <PopoverTrigger>
           <Button rounded={"full"} _hover={{ colorScheme: "gray.800" }} marginInline={"auto"}>
