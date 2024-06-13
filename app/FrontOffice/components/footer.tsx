@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Textarea, FormControl, FormLabel } from "@chakra-ui/react";
+import { Textarea,  FormLabel } from "@chakra-ui/react";
 import { CiMail } from "react-icons/ci";
 import { IoCallOutline } from "react-icons/io5";
 import { FaFacebook } from "react-icons/fa6";
@@ -31,7 +31,7 @@ export default function Footer() {
   }
 
   return (
-    <div className="bg-black text-white px-5 py-10 grid lg:grid-cols-2 grid-cols-1  text-sm">
+    <div className="bg-black text-white px-5 py-10 grid lg:grid-cols-2 grid-cols-1 lg:space-y-0 space-y-5  text-sm">
       <Toast shouldShow={open} description={description} status="success" />
       <div className="flex flex-col space-y-6 mx-auto text-gray-400">
         <p className="flex items-center gap-3">
@@ -50,7 +50,7 @@ export default function Footer() {
         © 2024eCar, car dealer. All rights Reserved. Made byHacktivistes!!!
         </p>
       </div>
-      <div className="w-3/4 mx-auto text-gray-400">
+      <div className="lg:w-3/4 w-full  mx-auto text-gray-400">
         <form onSubmit={handleSubmit(sendMessage)}>
           <FormLabel fontSize={"small"}>Message</FormLabel>
           <Textarea
