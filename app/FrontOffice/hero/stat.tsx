@@ -10,39 +10,27 @@ import {
 export default function StatHero() {
   return (
     <>
-      <StatGroup className="text-white bg-black bg-opacity-70 p-5">
+      <StatGroup className="text-white bg-black bg-opacity-70 p-5 grid grid-cols-2">
         <Stat>
           <StatLabel>total car</StatLabel>
           <StatNumber>2000+</StatNumber>
-          <StatHelpText>
-            <StatArrow type="increase" />
-            23.36%
-          </StatHelpText>
+          
         </Stat>
 
         <Stat>
-          <StatLabel>customer satisfait</StatLabel>
+          <StatLabel>customer</StatLabel>
           <StatNumber>1500+</StatNumber>
-          <StatHelpText>
-            <StatArrow type="decrease" />
-            9.05%
-          </StatHelpText>
+          
         </Stat>
         <Stat>
           <StatLabel>providers</StatLabel>
-          <StatNumber>45 country</StatNumber>
-          <StatHelpText>
-            <StatArrow type="decrease" />
-            9.05%
-          </StatHelpText>
+          <StatNumber>45 +</StatNumber>
+          
         </Stat>
         <Stat>
           <StatLabel>warranty</StatLabel>
-          <StatNumber>years 5+</StatNumber>
-          <StatHelpText>
-            <StatArrow type="decrease" />
-            9.05%
-          </StatHelpText>
+          <StatNumber>5+</StatNumber>
+          
         </Stat>
         
         

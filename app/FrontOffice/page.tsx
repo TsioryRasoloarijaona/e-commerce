@@ -51,7 +51,10 @@ export default async function ProductList({
     cars?.length == 0 ? (show = true) : (show = false);
   }
   if (cars?.length == 0) {
-    cars = await getData(`https://e-car.onrender.com/car/page/${key.page}`, "car");
+    cars = await getData(
+      `https://e-car.onrender.com/car/page/${key.page}`,
+      "car"
+    );
   }
 
   return (
@@ -60,10 +63,12 @@ export default async function ProductList({
         <PopPin />
         <header className="px-6 py-4 flex items-center justify-between sticky top-0 z-10 bg-gray-950">
           <Nav />
-          <div></div>
-          <FilterList />
+
           <Search />
         </header>
+      
+          <FilterList />
+      
 
         <Toast
           shouldShow={show}
@@ -71,11 +76,10 @@ export default async function ProductList({
           status="warning"
         />
         <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 justify-center mx-auto bg-gray-950 pt-7">
-          {cars?.map((el , index) => (
+          {cars?.map((el, index) => (
             <div key={index}>
               <CardProduct
                 detailLink={`/FrontOffice/details/${el.id}`}
-                
                 data={el}
               />
             </div>

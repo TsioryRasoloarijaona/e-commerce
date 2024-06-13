@@ -15,7 +15,7 @@ export default function CarInfo({car} : {car : carInterface}) {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <div className="grid grid-cols-3 gap-6 mb-16 text-sm mt-4">
+            <div className="grid lg:grid-cols-3 gap-6 md:grid-cols-2 grid-cols-1 mb-16 text-sm mt-4">
               <div className="border border-gray-700 w-fit py-2 px-5 rounded-full">
                 <p>model - {car.model} </p>
               </div>
