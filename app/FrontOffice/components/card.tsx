@@ -66,7 +66,7 @@ const CardProduct: React.FC<cardProps> = ({ data, detailLink }) => {
   };
 
   return (
-    <div className="text-center">
+    <div className="">
       <Toast status={status} shouldShow={open} description={description} />
       <Card maxW="lg" backgroundColor={"grey.400"} borderRadius={0}>
         <CardBody>
