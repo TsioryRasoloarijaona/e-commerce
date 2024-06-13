@@ -312,32 +312,32 @@ export default function CarTable({ tableData }: { tableData: Car[] }) {
 		}),
 
 
-		// columnHelper.accessor('images', {
-		// 	id: 'images',
-		// 	header: () => (
-		// 		<Text
-		// 			justifyContent='space-between'
-		// 			align='center'
-		// 			fontSize={{ sm: '10px', lg: '12px' }}
-		// 			color='gray.400'>
-		// 			IMAGES
-		// 		</Text>
-		// 	),
-		// 	cell: (info: any) => (
-		// 		<Flex align='center'>
-		// 			{info.getValue().map((imageUrl: string, index: number) => (
-		// 				<Image
-		// 					key={index}
-		// 					src={imageUrl}
-		// 					alt={`Car image ${index + 1}`}
-		// 					objectFit='cover'
-		// 					width={40}
-		// 					height={40}
-		// 				/>
-		// 			))}
-		// 		</Flex>
-		// 	)
-		// })
+		columnHelper.accessor('images', {
+			id: 'images',
+			header: () => (
+				<Text
+					justifyContent='space-between'
+					align='center'
+					fontSize={{ sm: '10px', lg: '12px' }}
+					color='gray.400'>
+					IMAGES
+				</Text>
+			),
+			cell: (info: any) => (
+				<Flex align='center'>
+					{info.getValue().map((imageUrl: string, index: number) => (
+						<Image
+							key={index}
+							src={imageUrl}
+							alt={`Car image ${index + 1}`}
+							objectFit='cover'
+							width={40}
+							height={40}
+						/>
+					))}
+				</Flex>
+			)
+		})
 	];
 
 	const table = useReactTable({
