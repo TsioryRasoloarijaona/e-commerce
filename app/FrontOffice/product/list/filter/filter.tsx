@@ -2,9 +2,11 @@
 import { Menu, MenuButton, MenuList, MenuItem, Button } from "@chakra-ui/react";
 import { ChevronDownIcon } from "@chakra-ui/icons";
 import { useState } from "react";
+
 export default function Filter({ option }: { option: string }) {
   const [choice, setChoice] = useState(option);
-  const menu: string[] = ["choice1", "choice2", "choice3"];
+  const menuItems: string[] = ["choice1", "choice2", "choice3"];
+
   return (
     <div>
       <Menu>
@@ -24,8 +26,8 @@ export default function Filter({ option }: { option: string }) {
           {choice}
         </MenuButton>
         <MenuList backgroundColor={"gray.800"} border={0}>
-          {menu.map((menu) => (
-            <MenuItem onClick={() => setChoice(menu)} backgroundColor={"gray.800"} color={"white"}>{menu}</MenuItem>
+          {menuItems.map((menuItem) => (
+            <MenuItem onClick={() => setChoice(menuItem)} backgroundColor={"gray.800"} color={"white"}>{menuItem}</MenuItem>
           ))}
         </MenuList>
       </Menu>
