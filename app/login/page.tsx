@@ -1,5 +1,5 @@
 import { Login } from "../Admin/auth/login/lib";
-import { Button, FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { Button, FormControl, FormLabel } from "@chakra-ui/react";
 import Image from "next/image";
 export default function page() {
   return (
