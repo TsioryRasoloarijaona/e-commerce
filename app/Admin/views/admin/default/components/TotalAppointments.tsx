@@ -29,7 +29,7 @@ export default function TotalAppointment(props: { [x: string]: any }) {
 	const handleMonthChange = async (event: React.ChangeEvent<HTMLSelectElement>) => {
 		const month = event.target.value;
 		try {
-		  const response = await fetch(`http://localhost:8080/rdv/count/byCar/month/${month}`);
+		  const response = await fetch(`https://e-car.onrender.com/rdv/count/byCar/month/${month}`);
 		  const data: [number, Car][] = await response.json();
 		  const transformedData = data.map(([count, car]) => ({
 			name: car.name,

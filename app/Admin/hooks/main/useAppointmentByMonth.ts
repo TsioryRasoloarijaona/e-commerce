@@ -6,7 +6,7 @@ const useAppointmentByMonth = (): number=> {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await fetch('http://localhost:8080/rdv/total/thisMonth');
+        const response = await fetch('https://e-car.onrender.com/rdv/total/thisMonth');
         if (response.ok) {
           const data: number = await response.json();
           setAppointmentByMonth(data);

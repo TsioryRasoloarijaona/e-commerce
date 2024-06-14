@@ -42,7 +42,7 @@ export default function CarTable({ tableData }: { tableData: Car[] }) {
 
 
 	const handleStatusFalse = async (carId: number) => {
-		const response = await fetch(`http://localhost:8080/car/statusFalse/${carId}`
+		const response = await fetch(`https://e-car.onrender.com/car/statusFalse/${carId}`
 			, { method: 'PUT' });
 		if (response.ok) {
 			setData(prevData =>
