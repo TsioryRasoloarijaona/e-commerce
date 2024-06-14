@@ -5,6 +5,7 @@ import ButtonAppointment from "@/app/FrontOffice/components/buttonClick/buttonAp
 import { SwipperComponent } from "@/app/FrontOffice/components/swipper";
 import { carInterface } from "@/app/FrontOffice/interface/carInterface";
 import { getData } from "@/app/FrontOffice/hooks/getData";
+import Footer from "../../components/footer";
 
 export default async function Page({ params }: { params: { id: number } }) {
   const car: carInterface = await getData(
@@ -34,6 +35,7 @@ export default async function Page({ params }: { params: { id: number } }) {
           </div>
         </div>
       </div>
+      <Footer/>
     </>
   );
 }

@@ -28,7 +28,7 @@ export async function Login (formData : FormData) {
         username : formData.get("username"),
         password : formData.get("password")
     }
-    const response: string = await PostAdmin("http://localhost:8080/token", admin);
+    const response: string = await PostAdmin("https://e-car.onrender.com/token", admin);
     if(response !== ''){
       const expires = Date.now() + 3600 * 1000
       cookies().set('session' , response , {expires})
