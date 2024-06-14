@@ -6,7 +6,7 @@ import AppointmentTable from '../../views/admin/dataTables/components/Appointmen
 import React from 'react';
 
 const AppointmentsPage = () => {
-  const apiUrl = 'http://localhost:8080/rdv/allRdv';
+  const apiUrl = 'https://e-car.onrender.com/rdv/allRdv';
 
   return (
     <Box pt={{ base: '130px', md: '80px', xl: '80px' }}>

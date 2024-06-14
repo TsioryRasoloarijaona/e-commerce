@@ -37,7 +37,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 	const theadColor = useColorModeValue('white', 'gray.800');
 
 	const handleValidate = async (id: number) => {
-		const response = await fetch(`http://localhost:8080/rdv/validate/${id}`
+		const response = await fetch(`https://e-car.onrender.com/rdv/validate/${id}`
 			, { method: 'PUT' });
 		if (response.ok) {
 			setAppointment(prevData =>
@@ -50,7 +50,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 	};
 
 	const handleReject = async (id: number) => {
-		const response = await fetch(`http://localhost:8080/rdv/reject/${id}`
+		const response = await fetch(`https://e-car.onrender.com/rdv/reject/${id}`
 			, { method: 'PUT' });
 		if (response.ok) {
 			setAppointment(prevData =>
@@ -63,7 +63,7 @@ export default function AppointmentTable({ apiUrl, tableData }: { apiUrl: string
 	};
 
 	const handleArchive = async (id: number) => {
-		const response = await fetch(`http://localhost:8080/rdv/archive/${id}`
+		const response = await fetch(`https://e-car.onrender.com/rdv/archive/${id}`
 			, { method: 'PUT' });
 		if (response.ok) {
 			setAppointment(prevData =>
