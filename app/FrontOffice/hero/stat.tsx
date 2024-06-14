@@ -28,6 +28,7 @@ export default function StatHero() {
             9.05%
           </StatHelpText>
         </Stat>
+
         <Stat>
           <StatLabel>providers</StatLabel>
           <StatNumber>45 country</StatNumber>
@@ -36,6 +37,7 @@ export default function StatHero() {
             9.05%
           </StatHelpText>
         </Stat>
+
         <Stat>
           <StatLabel>warranty</StatLabel>
           <StatNumber>years 5+</StatNumber>
@@ -44,7 +46,6 @@ export default function StatHero() {
             9.05%
           </StatHelpText>
         </Stat>
-        
         
       </StatGroup>
       ;
