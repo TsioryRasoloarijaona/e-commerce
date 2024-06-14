@@ -44,8 +44,6 @@ export default function StatHero() {
             9.05%
           </StatHelpText>
         </Stat>
-        
-        
       </StatGroup>
       ;
     </>
