@@ -23,5 +23,4 @@ export default function Nav() {
         <DrawerComponent position={'left'} header = {header} content = {content} button = {button} cssButton={style}/>
     </>
   )
-
 }
