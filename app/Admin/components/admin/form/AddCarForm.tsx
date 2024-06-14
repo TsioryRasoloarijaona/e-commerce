@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import { carInterface } from "@/app/FrontOffice/interface/carInterface";
 import { postData } from "@/app/FrontOffice/hooks/postData";
 import { message } from "@/app/FrontOffice/interface/message";
-import dataRevalidation from "@/app/FrontOffice/hooks/dataRevalidation";
+import dataRevalidation from "@/app/FrontOffice/hooks/revalidateCar";
 
 export default function AddCarForm() {
   const { urls } = useImageStore((state) => ({
@@ -35,8 +35,8 @@ export default function AddCarForm() {
       car
     );
     alert(response.success);
+    dataRevalidation();
     reset();
-    dataRevalidation("car");
   };
 
   return (

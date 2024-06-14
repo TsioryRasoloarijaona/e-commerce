@@ -1,4 +1,4 @@
-import { error } from "console";
+
 
 export async function getData<T>(url: string, tag: string): Promise<T> {
   const res = await fetch(url, { next: { tags: [tag] } });
