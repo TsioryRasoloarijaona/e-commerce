@@ -11,6 +11,7 @@ import { searchParamsCache } from "@/app/FrontOffice/hooks/searchParam";
 import { Toast } from "@/app/FrontOffice/components/toastComponent";
 import { PopPin } from "./components/popover/popPin";
 import Pagination from "./components/pagination";
+import Footer from "./components/footer";
 
 export default async function ProductList({
   searchParams,
@@ -66,9 +67,8 @@ export default async function ProductList({
 
           <Search />
         </header>
-      
-          <FilterList />
-      
+
+        <FilterList />
 
         <Toast
           shouldShow={show}
@@ -89,6 +89,7 @@ export default async function ProductList({
           <Pagination page={carPages} />
         </div>
       </div>
+      <Footer />
     </>
   );
 }

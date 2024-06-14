@@ -5,6 +5,7 @@ import { getData } from "./FrontOffice/hooks/getData";
 import Card from "./FrontOffice/components/card";
 import { searchParamsCache } from "./FrontOffice/hooks/searchParam";
 import { PopPin } from "./FrontOffice/components/popover/popPin";
+import Footer from "./FrontOffice/components/footer";
 async function Home({
   searchParams,
 }: {
@@ -31,6 +32,7 @@ async function Home({
     car = await getData("https://e-car.onrender.com/car/latest", "car");
   }
   return (
+    <>
     <div>
       <PopPin />
       <Hero />
@@ -47,6 +49,8 @@ async function Home({
         </div>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }
 
