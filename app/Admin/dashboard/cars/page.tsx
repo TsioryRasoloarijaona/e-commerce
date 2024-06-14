@@ -9,7 +9,7 @@ const CarsPage = () => {
 
   useEffect(() => {
     const fetchCars = async () => {
-      const res = await fetch('http://localhost:8080/car/allCar');
+      const res = await fetch('https://e-car.onrender.com/car/allCar');
       if (!res.ok) {
         throw new Error('Failed to fetch data');
       }

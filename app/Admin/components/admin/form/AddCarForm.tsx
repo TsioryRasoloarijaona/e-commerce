@@ -31,7 +31,7 @@ export default function AddCarForm() {
   const onClick = async (data: carInterface) => {
     const car: carInterface = { ...data, images: urls };
     const response: message = await postData(
-      "http://localhost:8080/car/save",
+      "https://e-car.onrender.com/car/save",
       car
     );
     alert(response.success);

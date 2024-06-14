@@ -6,7 +6,7 @@ const usePopularCar = (): string => {
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       try {
-        const response = await fetch('http://localhost:8080/rdv/favorite/car');
+        const response = await fetch('https://e-car.onrender.com/rdv/favorite/car');
         if (response.ok) {
           const data: [number, string] = await response.json();
           setPopularCar(data[1]); 
